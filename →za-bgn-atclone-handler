@@ -51,6 +51,52 @@ if [[ -n "${ICE[gem]}" ]] {
     }
 }
 
+if [[ -n "${ICE[pip]}" ]] {
+    local -a pip_defs srcdst tmpsdst imods umods
+    pip_defs=( "${(s.;.)ICE[pip]}" )
+
+    local pip
+    integer perform_update=0
+
+    for pip ( $pip_defs ) {
+        srcdst=( ${(@s.->.)pip} )
+        tmpsdst=( ${(@s.<-.)srcdst[1]} )
+        if (( ${#tmpsdst} > 1 )); then
+            srcdst=( "${tmpsdst[1]}" "${tmpsdst[2]}" "${srcdst[2]:-${tmpdist[2]#\!}}" )
+        else
+            srcdst=( "${tmpsdst[1]#\!}" "${tmpsdst[1]}" "${srcdst[2]:-${srcdst[1]#\!}}" )
+        fi
+        srcdst=( "${srcdst[@]//((#s)[[:space:]]##|[[:space:]]##(#e))/}" )
+        srcdst[2]=${srcdst[2]#\!}
+
+        # Substitute the standard keywords and param''-s
+        @zinit-substitute 'srcdst[1]' 'srcdst[2]' 'srcdst[3]'
+
+        if [[ "$hook" = *atclone-<-> ]]; then
+            imods+=( ${srcdst[2]} )
+        elif [[ "$hook" = *atpull-<-> && -n ${srcdst[2]} ]]; then
+            umods+=( ${srcdst[2]} )
+            perform_update=1
+            break
+        fi
+    }
+
+    (( ${#imods} )) && \
+        ( builtin cd -q "$dir" && command python3 -m venv venv && VIRTUALENV=venv(:A) command venv/bin/pip install "${imods[@]}" )
+
+    (( perform_update )) && (( ${#umods} )) && \
+        (
+            builtin cd -q "$dir" && {
+                if (( !OPTS[opt_-q,--quiet] )) {
+                    print -P -- "%F{38}bin-gem-node annex: %F{154}Updating the pip packages...%f"
+                    VIRTUALENV=venv(:A) command venv/bin/pip install --upgrade "${umods[@]}"
+                } else {
+                    VIRTUALENV=venv(:A) command venv/bin/pip install -q --upgrade "${umods[@]}"
+                }
+             }
+        )
+}
+
 if [[ -n "${ICE[node]}" ]] {
     local -a node_defs srcdst tmpsdst mods
     node_defs=( "${(s.;.)ICE[node]}" )
@@ -111,7 +157,7 @@ if (( ${+ICE[sbin]} )) {
         builtin cd -q "$dir" || return
 
         for sbin ( $sbins "" ) {
-            integer set_gem_home=0 set_node_path=0 set_cwd=0 \
+            integer set_gem_home=0 set_node_path=0 set_virtualenv=0 set_cwd=0 \
                     use_all_null=0 use_err_null=0 use_out_null=0
 
             if [[ -z $sbin && ${#sbins} -eq 0 ]] {
@@ -137,12 +183,13 @@ if (( ${+ICE[sbin]} )) {
 
             srcdst=( ${(@s.->.)sbin} )
             srcdst=( "${srcdst[@]//((#s)[[:space:]]##|[[:space:]]##(#e))/}" )
-            [[ ${srcdst[1]} = [gncNEO]#g[gncNEO]#:* ]] && set_gem_home=1
-            [[ ${srcdst[1]} = [gncNEO]#n[gncNEO]#:* ]] && set_node_path=1
-            [[ ${srcdst[1]} = [gncNEO]#c[gncNEO]#:* ]] && set_cwd=1
-            [[ ${srcdst[1]} = [gncNEO]#N[gncNEO]#:* ]] && use_all_null=1
-            [[ ${srcdst[1]} = [gncNEO]#E[gncNEO]#:* ]] && use_err_null=1
-            [[ ${srcdst[1]} = [gncNEO]#O[gncNEO]#:* ]] && use_out_null=1
+            [[ ${srcdst[1]} = [gnpcNEO]#g[gnpcNEO]#:* ]] && set_gem_home=1
+            [[ ${srcdst[1]} = [gnpcNEO]#n[gnpcNEO]#:* ]] && set_node_path=1
+            [[ ${srcdst[1]} = [gnpcNEO]#p[gnpcNEO]#:* ]] && set_virtualenv=1
+            [[ ${srcdst[1]} = [gnpcNEO]#c[gnpcNEO]#:* ]] && set_cwd=1
+            [[ ${srcdst[1]} = [gnpcNEO]#N[gnpcNEO]#:* ]] && use_all_null=1
+            [[ ${srcdst[1]} = [gnpcNEO]#E[gnpcNEO]#:* ]] && use_err_null=1
+            [[ ${srcdst[1]} = [gnpcNEO]#O[gnpcNEO]#:* ]] && use_out_null=1
             srcdst[1]=${srcdst[1]#[a-zA-Z]#:}
 
             # Substitute the standard keywords and param''-s
@@ -168,7 +215,7 @@ if (( ${+ICE[sbin]} )) {
                     .za-bgn-bin-or-src-function-body-cygwin 0 \
                                 "$fnam" \
                                 "$target_binary" "$dir" "$set_gem_home" \
-                                "$set_node_path" "$set_cwd" "$use_all_null" \
+                                "$set_node_path" "$set_virtualenv" "$set_cwd" "$use_all_null" \
                                 "$use_err_null" "$use_out_null"
                         builtin print -r -- "$REPLY" \
                             >! "$file.cmd"
@@ -178,7 +225,7 @@ if (( ${+ICE[sbin]} )) {
                 .za-bgn-bin-or-src-function-body 0 \
                             "$fnam" \
                             "$target_binary" "$dir" "$set_gem_home" \
-                            "$set_node_path" "$set_cwd" "$use_all_null" \
+                            "$set_node_path" "$set_virtualenv" "$set_cwd" "$use_all_null" \
                             "$use_err_null" "$use_out_null"
 
                 builtin print -r -- "#!/usr/bin/env zsh$nl$nl$REPLY$nl$nl$fnam \"\$@\"" \

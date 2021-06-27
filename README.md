@@ -13,11 +13,13 @@
   - [&nbsp;&nbsp;&nbsp; **`gem'[{path-to-binary} <-] !{gem-name} [-> {name-of-the-function}]; …'`**](#nbspnbspnbsp-gempath-to-binary---gem-name---name-of-the-function-)
   - [3. **`node'{node-module}; …'`**](#3-nodenode-module-)
   - [&nbsp;&nbsp;&nbsp; **`node'[{path-to-binary} <-] !{node-module} [-> {name-of-the-function}]; …'`**](#nbspnbspnbsp-nodepath-to-binary---node-module---name-of-the-function-)
-  - [4. **`fmod'[{g|n|c|N|E|O}:]{function-name}; …'`**](#4-fmodgncneofunction-name-)
+  - [4. **`pip'{pip-package}; …'`**](#3-pippip-package-)
+  - [&nbsp;&nbsp;&nbsp; **`pip'[{path-to-binary} <-] !{pip-package} [-> {name-of-the-function}]; …'`**](#nbspnbspnbsp-pippath-to-binary---pip-package---name-of-the-function-)
+  - [5. **`fmod'[{g|n|c|N|E|O}:]{function-name}; …'`**](#4-fmodgncneofunction-name-)
   - [&nbsp;&nbsp;&nbsp; **`fmod'[{g|n|c|N|E|O}:]{function-name} -> {wrapping-function-name}; …'`**](#nbspnbspnbsp-fmodgncneofunction-name---wrapping-function-name-)
-  - [5. **`sbin'[{g|n|c|N|E|O}:]{path-to-binary}[ -> {name-of-the-script}]; …'`**](#5-sbingncneopath-to-binary---name-of-the-script-)
-  - [6. **`fsrc'[{g|n|c|N|E|O}:]{path-to-script}[ -> {name-of-the-function}]; …'`**](#6-fsrcgncneopath-to-script---name-of-the-function-)
-  - [7. **`ferc'[{g|n|c|N|E|O}:]{path-to-script}[ -> {name-of-the-function}]; …'`**](#7-fercgncneopath-to-script---name-of-the-function-)
+  - [6. **`sbin'[{g|n|c|N|E|O}:]{path-to-binary}[ -> {name-of-the-script}]; …'`**](#5-sbingncneopath-to-binary---name-of-the-script-)
+  - [7. **`fsrc'[{g|n|c|N|E|O}:]{path-to-script}[ -> {name-of-the-function}]; …'`**](#6-fsrcgncneopath-to-script---name-of-the-function-)
+  - [8. **`ferc'[{g|n|c|N|E|O}:]{path-to-script}[ -> {name-of-the-function}]; …'`**](#7-fercgncneopath-to-script---name-of-the-function-)
 - [Additional Zinit commands](#additional-zinit-commands)
 - [Cygwin support](#cygwin-support)
 
@@ -31,18 +33,20 @@ A Zsh-Zinit annex (i.e. an extension) that provides functionality, which
 allows to:
 
   1. Run programs and scripts without adding anything to `$PATH`,
-  2. Install and run Ruby [gems](https://github.com/rubygems/rubygems) and
-     [Node](https://github.com/npm/cli) modules from within a local directory
-     with
+  2. Install and run Ruby [gems](https://github.com/rubygems/rubygems),
+	 [Node](https://github.com/npm/cli) and [Python](https://python.org)
+	 modules from within a local directory with
      [$GEM_HOME](https://guides.rubygems.org/command-reference/#gem-environment)
-     and
+     ,
      [$NODE_PATH](https://nodejs.org/api/modules.html#modules_loading_from_the_global_folders)
+     and
+     [$VIRTUALENV](https://docs.python.org/3/tutorial/venv.html)
      automatically set,
   3. Run programs, scripts and functions with automatic `cd` into the plugin
      or snippet directory, plus also with automatic standard output
      & standard error redirecting.
   4. Source scripts through an automatically created function with the above
-     `$GEM_HOME`, `$NODE_PATH` and `cd` features available,
+     `$GEM_HOME`, `$NODE_PATH`, `$VIRTUALENV` and `cd` features available,
   5. Create the so called `shims` known from
      [rbenv](https://github.com/rbenv/rbenv) – the same feature as the first
      item of this enumaration – of running a program without adding anything
@@ -83,7 +87,7 @@ will automatically create a function that will wrap the binary and provide it
 on the command line like if it was being placed in the `$PATH`.
 
 Also, like mentioned in the enumeration, the function can automatically
-export `$GEM_HOME`, `$NODE_PATH` shell variables and also automatically cd
+export `$GEM_HOME`, `$NODE_PATH`, `$VIRTUALENV` shell variables and also automatically cd
 into the plugin or snippet directory right before executing the binary and
 then cd back to the original directory after the execution is finished.
 
@@ -150,9 +154,11 @@ There are 7 ice-modifiers provided and handled by the annex. They are:
      binaries.
   4. `node''` – installs and updates node_modules + creates functions for
      binaries of the modules.
-  5. `fmod''` – creates wrapping functions for other functions.
-  6. `fsrc''` – creates functions that source given scripts.
-  7. `ferc''` – the same as `fsrc''`, but using an alternate script-loading
+  5. `pip''` – installs and updates python packages into a virtualenv + creates
+	 functions for binaries of the packages.
+  6. `fmod''` – creates wrapping functions for other functions.
+  7. `fsrc''` – creates functions that source given scripts.
+  8. `ferc''` – the same as `fsrc''`, but using an alternate script-loading
      method.
 
 **The ice-modifiers in detail:**
@@ -208,6 +214,7 @@ path or as `{name-of-the-function}`. The optional preceding flags mean:
   
   - `g` – set `$GEM_HOME` variable to `{plugin-dir}`,
   - `n` – set `$NODE_PATH` variable to `{plugin-dir}/node_modules`,
+  - `p` – set `$VIRTUALENV` variable to `{plugin-dir}/venv`,
   - `c` – cd to the plugin's directory before running the program and then cd
     back after it has been run,
   - `N` – append `&>/dev/null` to the call of the binary, i.e. redirect both
@@ -300,7 +307,41 @@ has been used.
 
 ---
 
-## 4. **`fmod'[{g|n|c|N|E|O}:]{function-name}; …'`**
+## 4. **`pip'{pip-package}; …'`**
+## &nbsp;&nbsp;&nbsp; **`node'[{path-to-binary} <-] !{pip-package} [-> {name-of-the-function}]; …'`**
+
+Installs the node module of name `{pip-package}` inside the plugin's or
+snippet's directory.
+
+In the second form it also creates a wrapper function identical to the one
+created with `fbin''` ice.
+
+Example:
+
+```zsh
+% zinit delete zdharma/null
+Delete /home/sg/.zinit/plugins/zdharma---null?
+[yY/n…]
+y
+Done (action executed, exit code: 0)
+% zinit ice node'ansible <- !ansible -> ansible; ansible-lint'
+% zinit load zdharma/null
+…installation messages…
+% which remark
+ansible () {
+        local bindir="/home/sg/.zinit/plugins/zdharma---null/venv/bin"
+        local -x VIRTUALENV="/home/sg/.zinit/plugins/zdharma---null"/venv
+        "$bindir"/"ansible" "$@"
+}
+```
+
+In this case the name of the binary program provided by the node module is
+different from its name, hence the second form with the `b <- a -> c` syntax
+has been used.
+
+---
+
+## 5. **`fmod'[{g|n|c|N|E|O}:]{function-name}; …'`**
 ## &nbsp;&nbsp;&nbsp; **`fmod'[{g|n|c|N|E|O}:]{function-name} -> {wrapping-function-name}; …'`**
 
 It wraps given function with the ability to set `$GEM_HOME`, etc. – the
@@ -335,8 +376,8 @@ README.md
 
 ---
 
-## 6. **`fsrc'[{g|n|c|N|E|O}:]{path-to-script}[ -> {name-of-the-function}]; …'`**
-## 7. **`ferc'[{g|n|c|N|E|O}:]{path-to-script}[ -> {name-of-the-function}]; …'`**
+## 7. **`fsrc'[{g|n|c|N|E|O}:]{path-to-script}[ -> {name-of-the-function}]; …'`**
+## 8. **`ferc'[{g|n|c|N|E|O}:]{path-to-script}[ -> {name-of-the-function}]; …'`**
 
 Creates a wrapper function that at each invocation sources the given file.
 The second ice, `ferc''` works the same with the single difference that it

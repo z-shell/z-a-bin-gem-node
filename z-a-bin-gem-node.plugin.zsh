@@ -27,7 +27,7 @@ autoload .za-bgn-bin-or-src-function-body \
     hook:\!atload-50 \
     →za-bgn-atload-handler \
     →za-bgn-help-handler \
-    "fbin''|sbin|sbin''|gem''|node''|fmod''|fsrc''|ferc''" # also register new ices
+    "fbin''|sbin|sbin''|gem''|node''|pip''|fmod''|fsrc''|ferc''" # also register new ices
 
 @zinit-register-annex "z-a-bin-gem-node" \
     hook:atclone-50 \
