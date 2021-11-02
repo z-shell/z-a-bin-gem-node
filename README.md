@@ -25,7 +25,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# z-a-bin-gem-node
+# `Z-A-BIN-GEM-NODE`
 
 ## Introduction
 
@@ -61,7 +61,7 @@ allows to:
 Simply load like a regular plugin, i.e.:
 
 ```zsh
-zinit light zinit-zsh/z-a-bin-gem-node
+zinit light z-shell/z-a-bin-gem-node
 ```
 
 After executing this command you can then use the new ice-mods provided by
