@@ -80,7 +80,7 @@ forwarder-functions elaborated on in the following text:
 Below is a diagram explaining the major feature – exposing a binary program
 or script through a Zsh function of the same name:
 
-![diagram](https://raw.githubusercontent.com/zinit-zsh/z-a-bin-gem-node/master/images/diag.png)
+![diagram](https://raw.githubusercontent.com/z-shell/z-a-bin-gem-node/main/images/diag.png)
 
 This way there is no need to add anything to `$PATH` – `z-a-bin-gem-node`
 will automatically create a function that will wrap the binary and provide it
@@ -262,11 +262,11 @@ Example:
 
 ```zsh
 % zinit ice gem'!asciidoctor'
-% zinit load zdharma/null
+% zinit load z-shell/null
 % which asciidoctor
 asciidoctor () {
-        local bindir="/home/sg/.zinit/plugins/zdharma---null/bin" 
-        local -x GEM_HOME="/home/sg/.zinit/plugins/zdharma---null" 
+        local bindir="/home/sg/.zinit/plugins/z-shell---null/bin" 
+        local -x GEM_HOME="/home/sg/.zinit/plugins/z-shell---null" 
         "$bindir"/"asciidoctor" "$@"
 }
 ```
@@ -285,18 +285,18 @@ created with `fbin''` ice.
 Example:
 
 ```zsh
-% zinit delete zdharma/null
-Delete /home/sg/.zinit/plugins/zdharma---null?
+% zinit delete z-shell/null
+Delete /home/sg/.zinit/plugins/z-shell---null?
 [yY/n…]
 y
 Done (action executed, exit code: 0)
 % zinit ice node'remark <- !remark-cli -> remark; remark-man'
-% zinit load zdharma/null
+% zinit load z-shell/null
 …installation messages…
 % which remark
 remark () {
-        local bindir="/home/sg/.zinit/plugins/zdharma---null/node_modules/.bin"
-        local -x NODE_PATH="/home/sg/.zinit/plugins/zdharma---null"/node_modules
+        local bindir="/home/sg/.zinit/plugins/z-shell---null/node_modules/.bin"
+        local -x NODE_PATH="/home/sg/.zinit/plugins/z-shell---null"/node_modules
         "$bindir"/"remark" "$@"
 }
 ```
@@ -319,18 +319,18 @@ created with `fbin''` ice.
 Example:
 
 ```zsh
-% zinit delete zdharma/null
-Delete /home/sg/.zinit/plugins/zdharma---null?
+% zinit delete z-shell/null
+Delete /home/sg/.zinit/plugins/z-shell---null?
 [yY/n…]
 y
 Done (action executed, exit code: 0)
 % zinit ice node'ansible <- !ansible -> ansible; ansible-lint'
-% zinit load zdharma/null
+% zinit load z-shell/null
 …installation messages…
 % which remark
 ansible () {
-        local bindir="/home/sg/.zinit/plugins/zdharma---null/venv/bin"
-        local -x VIRTUALENV="/home/sg/.zinit/plugins/zdharma---null"/venv
+        local bindir="/home/sg/.zinit/plugins/z-shell---null/venv/bin"
+        local -x VIRTUALENV="/home/sg/.zinit/plugins/z-shell---null"/venv
         "$bindir"/"ansible" "$@"
 }
 ```
@@ -352,15 +352,15 @@ Example:
 ```zsh
 % myfun() { pwd; ls -1 }
 % zinit ice fmod'cgn:myfun'
-% zinit load zdharma/null
+% zinit load z-shell/null
 % which myfun
 myfun () {
-        local -x GEM_HOME="/home/sg/.zinit/plugins/zdharma---null"
-        local -x NODE_PATH="/home/sg/.zinit/plugins/zdharma---null"/node_modules
+        local -x GEM_HOME="/home/sg/.zinit/plugins/z-shell---null"
+        local -x NODE_PATH="/home/sg/.zinit/plugins/z-shell---null"/node_modules
         local oldpwd="/home/sg/.zinit/plugins/zinit---z-a-bin-gem-node"
         () {
                 setopt localoptions noautopushd
-                builtin cd -q "/home/sg/.zinit/plugins/zdharma---null"
+                builtin cd -q "/home/sg/.zinit/plugins/z-shell---null"
         }
         "myfun--za-bgn-orig" "$@"
         () {
@@ -369,7 +369,7 @@ myfun () {
         }
 }
 % myfun
-/home/sg/.zinit/plugins/zdharma---null
+/home/sg/.zinit/plugins/z-shell---null
 LICENSE
 README.md
 ```
@@ -388,10 +388,10 @@ Example:
 
 ```zsh
 % zinit ice fsrc"myscript -> myfunc" ferc"myscript"
-% zinit load zdharma/null
+% zinit load z-shell/null
 % which myfunc
 myfunc () {
-        local bindir="/home/sg/.zinit/plugins/zdharma---null"
+        local bindir="/home/sg/.zinit/plugins/z-shell---null"
         () {
                 source "$bindir"/"myscript"
         } "$@"
@@ -416,7 +416,7 @@ There's an additional Zinit command that's provided by this annex
 currently stored under `$ZPFX/bin`. Example invocation:
 
 ![shim-list
-invocation](https://raw.githubusercontent.com/zinit-zsh/z-a-bin-gem-node/master/images/shim-list.png)
+invocation](https://raw.githubusercontent.com/z-shell/z-a-bin-gem-node/main/images/shim-list.png)
 
 Available options are:
 
