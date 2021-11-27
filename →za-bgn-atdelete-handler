@@ -1,5 +1,7 @@
-# Copyright (c) 2019-2020 Sebastian Gniazdowski
-# License MIT
+# shellcheck shell=sh
+#
+# Copyright (c) 2019 Sebastian Gniazdowski
+# Copyright (c) 2021 Z-Shell ZI Contributors
 
 emulate -RL zsh
 setopt extendedglob warncreateglobal typesetsilent noshortloops
@@ -21,7 +23,7 @@ if (( ${+ICE[sbin]} )) {
     local sbin
     integer set_gem_home set_node_path set_virtualenv
 
-    ( 
+    (
         builtin cd -q "$dir"
         for sbin ( $sbins "" ) {
             if [[ -z $sbin && ${#sbins} -eq 0 ]]; then
@@ -78,5 +80,3 @@ if (( ${+ICE[sbin]} )) {
         }
     )
 }
-
-# vim:ft=zsh:sw=4:sts=4:et

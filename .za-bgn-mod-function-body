@@ -1,5 +1,8 @@
+# shellcheck shell=sh disable=SC2168,3043,2034,3010,3006,2154,2298,2296,3054,3024
+#
 # Copyright (c) 2019 Sebastian Gniazdowski
-# License MIT
+# Copyright (c) 2021 Z-Shell ZI Contributors
+
 #
 # Returns the body of the function wrapping a function
 
@@ -27,5 +30,3 @@ ${(qqq)target_func} \"\$@\""
 REPLY+="$nl"
 REPLY+="${${(M)set_cwd:#1}:+"() { setopt localoptions noautopushd; builtin cd -q \"\$oldpwd\"; }"}
 }"
-
-# vim:ft=zsh:sw=4:sts=4:et

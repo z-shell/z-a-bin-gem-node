@@ -1,5 +1,7 @@
-# Copyright (c) 2019-2020 Sebastian Gniazdowski
-# License MIT
+# shellcheck shell=sh
+#
+# Copyright (c) 2019 Sebastian Gniazdowski
+# Copyright (c) 2021 Z-Shell ZI Contributors
 
 # According to the Zsh Plugin Standard:
 # http://zdharma.org/Zsh-100-Commits-Club/Zsh-Plugin-Standard.html

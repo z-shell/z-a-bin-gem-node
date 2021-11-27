@@ -1,5 +1,8 @@
-# Copyright (c) 2019-2020 Sebastian Gniazdowski
-# License MIT
+# shellcheck shell=sh
+#
+# Copyright (c) 2019 Sebastian Gniazdowski
+# Copyright (c) 2021 Z-Shell ZI Contributors
+
 
 →za-bgn-atclone-handler() {
 
@@ -221,7 +224,7 @@ if (( ${+ICE[sbin]} )) {
                             >! "$file.cmd"
                         command chmod +x "$file.cmd"
                 fi
-                
+
                 .za-bgn-bin-or-src-function-body 0 \
                             "$fnam" \
                             "$target_binary" "$dir" "$set_gem_home" \
@@ -235,7 +238,7 @@ if (( ${+ICE[sbin]} )) {
                 if [[ -x $file ]]; then
                     (( !OPTS[opt_-q,--quiet] )) && \
                         if [[ -x $target_binary ]]; then
-                            if [[ $hook == atclone-<-> || $ZINIT[annex-multi-flag:pull-active] -ge  2 ]] {
+                            if [[ $hook == atclone-<-> || $ZI[annex-multi-flag:pull-active] -ge  2 ]] {
                                 print -P -- "%F{38}bin-gem-node annex: %F{154}${${${hook:#*atclone-<->}:+Re-c}:-C}reated the %F{219}$fnam%F{154} shim and set +x on the %F{219}${target_binary:t}%F{154} binary%f"
                             }
                         else

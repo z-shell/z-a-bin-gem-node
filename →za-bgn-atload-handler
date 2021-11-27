@@ -1,5 +1,7 @@
-# Copyright (c) 2019-2020 Sebastian Gniazdowski
-# License MIT
+# shellcheck shell=sh
+#
+# Copyright (c) 2019 Sebastian Gniazdowski
+# Copyright (c) 2021 Z-Shell ZI Contributors
 
 →za-bgn-atload-handler() {
 
@@ -168,7 +170,7 @@ if (( ${+ICE[fbin]}${+ICE[fsrc]}${+ICE[ferc]} > 0 )) {
         [[ ${srcdst[1]} = [gnpcNEO]#E[gnpcNEO]#:* ]] && use_err_null=1
         [[ ${srcdst[1]} = [gnpcNEO]#O[gnpcNEO]#:* ]] && use_out_null=1
         srcdst[1]=${srcdst[1]#[a-zA-Z]#:}
-        
+
         # Substitute the standard keywords and param''-s
         @zinit-substitute 'srcdst[1]' 'srcdst[2]'
 
@@ -207,7 +209,7 @@ if [[ -n "${ICE[fmod]}" ]] {
         [[ ${srcdst[1]} = [gnpcNEO]#E[gnpcNEO]#:* ]] && use_err_null=1
         [[ ${srcdst[1]} = [gnpcNEO]#O[gnpcNEO]#:* ]] && use_out_null=1
         srcdst[1]=${srcdst[1]#[a-zA-Z]#:}
-        
+
         # Substitute the standard keywords and param''-s
         @zinit-substitute 'srcdst[1]' 'srcdst[2]'
 
@@ -222,5 +224,3 @@ if [[ -n "${ICE[fmod]}" ]] {
 }
 
 }
-
-# vim:ft=zsh:sw=4:sts=4:et

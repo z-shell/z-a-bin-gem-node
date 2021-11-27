@@ -1,5 +1,7 @@
+# shellcheck shell=sh disable=SC1073,SC1036,SC1088,SC3043,SC2034,SC3003,SC2296,SC2298,SC3006,SC1073,SC2154,SC3024,SC1037
+#
 # Copyright (c) 2019 Sebastian Gniazdowski
-# License MIT
+# Copyright (c) 2021 Z-Shell ZI Contributors
 #
 # FUNCTION: .za-bgn-bin-or-src-function-body
 # Returns the body of the function wrapping a binary
@@ -36,5 +38,3 @@ fi
 REPLY+="$nl"
 REPLY+="${${(M)set_cwd:#1}:+"$nl$tab() { setopt localoptions noautopushd; builtin cd -q \"\$oldpwd\"; }"}
 }"
-
-# vim:ft=zsh:sw=4:sts=4:et
