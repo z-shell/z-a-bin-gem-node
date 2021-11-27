@@ -35,7 +35,7 @@ if [[ -n "${ICE[gem]}" ]] {
         srcdst[2]=${srcdst[2]#\!}
 
         # Substitute the standard keywords and param''-s
-        @zinit-substitute 'srcdst[1]' 'srcdst[2]' 'srcdst[3]'
+        @zi-substitute 'srcdst[1]' 'srcdst[2]' 'srcdst[3]'
 
         gems+=( ${srcdst[2]} )
     }
@@ -73,7 +73,7 @@ if [[ -n "${ICE[pip]}" ]] {
         srcdst[2]=${srcdst[2]#\!}
 
         # Substitute the standard keywords and param''-s
-        @zinit-substitute 'srcdst[1]' 'srcdst[2]' 'srcdst[3]'
+        @zi-substitute 'srcdst[1]' 'srcdst[2]' 'srcdst[3]'
 
         if [[ "$hook" = *atclone-<-> ]]; then
             imods+=( ${srcdst[2]} )
@@ -119,7 +119,7 @@ if [[ -n "${ICE[node]}" ]] {
         srcdst[2]=${srcdst[2]#\!}
 
         # Substitute the standard keywords and param''-s
-        @zinit-substitute 'srcdst[1]' 'srcdst[2]' 'srcdst[3]'
+        @zi-substitute 'srcdst[1]' 'srcdst[2]' 'srcdst[3]'
 
         if [[ "$hook" = *atclone-<-> ]]; then
             mods+=( ${srcdst[2]} )
@@ -196,7 +196,7 @@ if (( ${+ICE[sbin]} )) {
             srcdst[1]=${srcdst[1]#[a-zA-Z]#:}
 
             # Substitute the standard keywords and param''-s
-            @zinit-substitute 'srcdst[1]' 'srcdst[2]'
+            @zi-substitute 'srcdst[1]' 'srcdst[2]'
 
             local -a fnames
             local fname
@@ -264,7 +264,7 @@ if [[ -n "${ICE[fbin]}" ]] {
         srcdst[1]=${srcdst[1]#[a-zA-Z]##:}
 
         # Substitute the standard keywords and param''-s
-        @zinit-substitute 'srcdst[1]'
+        @zi-substitute 'srcdst[1]'
 
         local target_binary="${${(M)srcdst[1]:#/*}:-$dir/${srcdst[1]}}" \
 
