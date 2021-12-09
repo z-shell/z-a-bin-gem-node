@@ -1,5 +1,3 @@
-# shellcheck shell=sh
-#
 # Copyright (c) 2019 Sebastian Gniazdowski
 # Copyright (c) 2021 Z-Shell ZI Contributors
 
@@ -39,7 +37,7 @@ if (( ${+ICE[sbin]} )) {
                     if (( ${#files} )); then
                         sbin="${files[1]}"
                     else
-                        print -P -- "%F{38}bin-gem-node annex: %F{160}The automatic-empty sbin ice didn't find any executable files%f"
+                        print -P -- "%F{93}bin-gem-node annex: %F{160}The automatic-empty sbin ice didn't find any executable files%f"
                         break
                     fi
                 fi
@@ -69,12 +67,12 @@ if (( ${+ICE[sbin]} )) {
                 if [[ -f $file ]]; then
                     command rm -f "$file"
                     if [[ -f $file ]]; then
-                        print -P -- "%F{38}bin-gem-node annex: %F{160}Couldn't remove the %F{220}$fnam%F{160} shim from \$ZPFX/bin (no write access to \$ZPFX/bin?)%f"
+                        print -P -- "%F{93}bin-gem-node annex: %F{160}Couldn't remove the %F{220}$fnam%F{160} shim from \$ZPFX/bin (no write access to \$ZPFX/bin?)%f"
                     else
-                        print -P -- "%F{38}bin-gem-node annex: %F{154}Correctly removed the %F{220}$fnam%F{154} shim from \$ZPFX/bin%f" || \
+                        print -P -- "%F{93}bin-gem-node annex: %F{51}Correctly removed the %F{220}$fnam%F{51} shim from \$ZPFX/bin%f" || \
                     fi
                 else
-                    print -P -- "%F{38}bin-gem-node annex: %F{160}The %F{220}$fnam%F{160} shim didn't exist in \$ZPFX/bin (or isn't a regular file)%f"
+                    print -P -- "%F{93}bin-gem-node annex: %F{160}The %F{220}$fnam%F{160} shim didn't exist in \$ZPFX/bin (or isn't a regular file)%f"
                 fi
             }
         }

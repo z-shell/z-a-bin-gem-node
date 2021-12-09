@@ -2,16 +2,16 @@
 - [Installation](#installation)
 - [How it works – bird's-eye view](#how-it-works--birds-eye-view)
 - [How it works, in detail](#how-it-works-in-detail)
-	- [The Ice Modifiers Provided By The Annex](#the-ice-modifiers-provided-by-the-annex)
-		- [The Ice Modifiers Provided By The Annex in detail](#the-ice-modifiers-provided-by-the-annex-in-detail)
-			- [`SBIN''`](#sbin)
-			- [`FBIN''`](#fbin)
-			- [`GEM''`](#gem)
-			- [`NODE''`](#node)
-			- [`PIP''`](#pip)
-			- [`FMOD''`](#fmod)
-			- [`FSCR''`](#fscr)
-			- [`FERC''`](#ferc)
+  - [The Ice Modifiers Provided By The Annex](#the-ice-modifiers-provided-by-the-annex)
+    - [The Ice Modifiers Provided By The Annex in detail](#the-ice-modifiers-provided-by-the-annex-in-detail)
+      - [`SBIN''`](#sbin)
+      - [`FBIN''`](#fbin)
+      - [`GEM''`](#gem)
+      - [`NODE''`](#node)
+      - [`PIP''`](#pip)
+      - [`FMOD''`](#fmod)
+      - [`FSCR''`](#fscr)
+      - [`FERC''`](#ferc)
 - [Additional ZI commands](#additional-zi-commands)
 - [Cygwin Support](#cygwin-support)
 
@@ -73,7 +73,7 @@ forwarder-functions elaborated on in the following text:
 Below is a diagram explaining the major feature – exposing a binary program
 or script through a Zsh function of the same name:
 
-![diagram](https://raw.githubusercontent.com/z-shell/z-a-bin-gem-node/main/images/diag.png)
+![diagram](images/diag.png)
 
 This way there is no need to add anything to `$PATH` – `z-a-bin-gem-node`
 will automatically create a function that will wrap the binary and provide it
@@ -142,16 +142,16 @@ an embedded path to it. Thus, no `$PATH` changes are needed!
 
 There are 7 ice-modifiers provided and handled by the annex. They are:
 
--   [`sbin''`](#sbin) – creates `shims` for binaries and scripts.
--   [`fbin''`](#fbin) – creates functions for binaries and scripts.
--   [`gem''`](#gem) – installs and updates gems + creates functions for gems' binaries.
--   [`node''`](#node) – installs and updates node_modules + creates functions for binaries of the modules.
--   [`pip''`](#pip) – installs and updates python packages into a virtualenv + creates
-    functions for binaries of the packages.
--   [`fmod''`](#fmod) – creates wrapping functions for other functions.
--   [`fsrc''`](#fsrc) – creates functions that source given scripts.
--   [`ferc''`](#ferc) – the same as [`fsrc''`](#fscr), but using an alternate script-loading
-    method.
+- [`sbin''`](#sbin) – creates `shims` for binaries and scripts.
+- [`fbin''`](#fbin) – creates functions for binaries and scripts.
+- [`gem''`](#gem) – installs and updates gems + creates functions for gems' binaries.
+- [`node''`](#node) – installs and updates node_modules + creates functions for binaries of the modules.
+- [`pip''`](#pip) – installs and updates python packages into a virtualenv + creates
+  functions for binaries of the packages.
+- [`fmod''`](#fmod) – creates wrapping functions for other functions.
+- [`fsrc''`](#fsrc) – creates functions that source given scripts.
+- [`ferc''`](#ferc) – the same as [`fsrc''`](#fscr), but using an alternate script-loading
+  method.
 
 ### The Ice Modifiers Provided By The Annex in detail
 
@@ -190,12 +190,12 @@ fzf "$@"
 
 **The ice can be empty**. It will then try to create the shim for:
 
--   trailing component of the `id_as` ice, e.g.: `id_as'exts/git-my'` → it'll
-    check if a file `git-my` exists and if yes, create the shim `git-my`,
--   the plugin name, e.g.: for `paulirish/git-open` it'll check if a file
-    `git-open` exists and if yes, create the shim `git-open`,
--   trailing component of the snippet URL,
--   for any alphabetically first executable file.
+- trailing component of the `id_as` ice, e.g.: `id_as'exts/git-my'` → it'll
+  check if a file `git-my` exists and if yes, create the shim `git-my`,
+- the plugin name, e.g.: for `paulirish/git-open` it'll check if a file
+  `git-open` exists and if yes, create the shim `git-open`,
+- trailing component of the snippet URL,
+- for any alphabetically first executable file.
 
 #### `FBIN''`
 
@@ -204,17 +204,17 @@ fzf "$@"
 Creates a wrapper function of the name the same as the last segment of the
 path or as `{name-of-the-function}`. The optional preceding flags mean:
 
--   `g` – set `$GEM_HOME` variable to `{plugin-dir}`,
--   `n` – set `$NODE_PATH` variable to `{plugin-dir}/node_modules`,
--   `p` – set `$VIRTUALENV` variable to `{plugin-dir}/venv`,
--   `c` – cd to the plugin's directory before running the program and then cd
-    back after it has been run,
--   `N` – append `&>/dev/null` to the call of the binary, i.e. redirect both
-    standard output and standard error to `/dev/null`,
--   `E` – append `2>/dev/null` to the call of the binary, i.e. redirect
-    standard error to `/dev/null`,
--   `O` – append `>/dev/null` to the call of the binary, i.e. redirect
-    standard output to `/dev/null`.
+- `g` – set `$GEM_HOME` variable to `{plugin-dir}`,
+- `n` – set `$NODE_PATH` variable to `{plugin-dir}/node_modules`,
+- `p` – set `$VIRTUALENV` variable to `{plugin-dir}/venv`,
+- `c` – cd to the plugin's directory before running the program and then cd
+  back after it has been run,
+- `N` – append `&>/dev/null` to the call of the binary, i.e. redirect both
+  standard output and standard error to `/dev/null`,
+- `E` – append `2>/dev/null` to the call of the binary, i.e. redirect
+  standard error to `/dev/null`,
+- `O` – append `>/dev/null` to the call of the binary, i.e. redirect
+  standard output to `/dev/null`.
 
 Example:
 
@@ -231,12 +231,12 @@ myfzf () {
 
 **The ice can be empty**. It will then try to create the function for:
 
--   trailing component of the `id_as` ice, e.g.: `id_as'exts/git-my'` → it'll
-    check if a file `git-my` exists and if yes, create the function `git-my`,
--   the plugin name, e.g.: for `paulirish/git-open` it'll check if a file
-    `git-open` exists and if yes, create the function `git-open`,
--   trailing component of the snippet URL,
--   for any alphabetically first executable file.
+- trailing component of the `id_as` ice, e.g.: `id_as'exts/git-my'` → it'll
+  check if a file `git-my` exists and if yes, create the function `git-my`,
+- the plugin name, e.g.: for `paulirish/git-open` it'll check if a file
+  `git-open` exists and if yes, create the function `git-open`,
+- trailing component of the snippet URL,
+- for any alphabetically first executable file.
 
 #### `GEM''`
 
@@ -415,7 +415,7 @@ There's an additional ZI command that's provided by this annex
 currently stored under `$ZPFX/bin`. Example invocation:
 
 ![shim-list
-invocation](https://raw.githubusercontent.com/z-shell/z-a-bin-gem-node/main/images/shim-list.png)
+invocation](images/shim-list.png)
 
 Available options are:
 
@@ -426,20 +426,20 @@ zi shim-list [-h/--help] [-t|--this-dir] [-i|--from-ices] \
 
 The options' meanings:
 
--   `-h/--help` – shows a usage information,
--   `-t/--this-dir` – instructs ZI to look for shims in the current
-    directory instead of `$ZPFX/bin`,
--   `-i/--from-ices` – normally the code looks for the shim files by examining
-    their contents (shims created by BGN annex have a fixed structure); this
-    option instructs ZI to show the list of shims that results from the
-    `sbin''` ice of the loaded plugins; i.e.: if a plugin has `sbin'git-open'`,
-    for example, then this means that there has to be such shim already
-    created,
--   `-o/--one-line` – display the list of shim files without line breaks, in
-    single line, after spaces,
--   `-s/--short` – don't show the plugin/snippet that the shim belongs to,
--   `-c/--cat` – displays contents of each of the found shim
-    (unimplemented yet).
+- `-h/--help` – shows a usage information,
+- `-t/--this-dir` – instructs ZI to look for shims in the current
+  directory instead of `$ZPFX/bin`,
+- `-i/--from-ices` – normally the code looks for the shim files by examining
+  their contents (shims created by BGN annex have a fixed structure); this
+  option instructs ZI to show the list of shims that results from the
+  `sbin''` ice of the loaded plugins; i.e.: if a plugin has `sbin'git-open'`,
+  for example, then this means that there has to be such shim already
+  created,
+- `-o/--one-line` – display the list of shim files without line breaks, in
+  single line, after spaces,
+- `-s/--short` – don't show the plugin/snippet that the shim belongs to,
+- `-c/--cat` – displays contents of each of the found shim
+  (unimplemented yet).
 
 # Cygwin Support
 

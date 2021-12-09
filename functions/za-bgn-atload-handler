@@ -1,9 +1,7 @@
-# shellcheck shell=sh
-#
 # Copyright (c) 2019 Sebastian Gniazdowski
 # Copyright (c) 2021 Z-Shell ZI Contributors
 
-→za-bgn-atload-handler() {
+za-bgn-atload-handler() {
 
 emulate -RL zsh
 setopt extendedglob warncreateglobal typesetsilent noshortloops
@@ -152,7 +150,7 @@ if (( ${+ICE[fbin]}${+ICE[fsrc]}${+ICE[ferc]} > 0 )) {
                 if (( ${#files} )); then
                     fbin="${files[1]}"
                 else
-                    print -P -- "%F{38}bin-gem-node annex: %F{160}The automatic-empty fbin ice didn't find any executable files for %F{219}$id_as%f"
+                    print -P -- "%F{93}bin-gem-node annex: %F{160}The automatic-empty fbin ice didn't find any executable files for %F{82}$id_as%f"
                     break
                 fi
             fi
@@ -176,7 +174,7 @@ if (( ${+ICE[fbin]}${+ICE[fsrc]}${+ICE[ferc]} > 0 )) {
 
         local target_binary="${${(M)srcdst[1]:#/*}:-$dir/${srcdst[1]}}"
 
-        .za-bgn-bin-or-src-function-body "$run_type" \
+        za-bgn-bin-or-src-function-body "$run_type" \
                        "${srcdst[2]:-${srcdst[1]:t}}" \
                        "$target_binary" "$dir" "$set_gem_home" \
                        "$set_node_path" "$set_virtualenv" "$set_cwd" "$use_all_null" \
@@ -215,7 +213,7 @@ if [[ -n "${ICE[fmod]}" ]] {
 
         local target_function="${srcdst[1]}"
 
-        .za-bgn-mod-function-body "${srcdst[2]:-${srcdst[1]}}" \
+        za-bgn-mod-function-body "${srcdst[2]:-${srcdst[1]}}" \
                        "$target_function" "$dir" "$set_gem_home" \
                        "$set_node_path" "$set_virtualenv" "$set_cwd" "$use_all_null" \
                        "$use_err_null" "$use_out_null"

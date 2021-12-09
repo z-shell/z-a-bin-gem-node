@@ -1,5 +1,3 @@
-# shellcheck shell=sh disable=SC1073,SC1036,SC1088
-#
 # Copyright (c) 2019 Sebastian Gniazdowski
 # Copyright (c) 2021 Z-Shell ZI Contributors
 
@@ -8,7 +6,7 @@
 #		    [-o|--one-line] [-s|--short]
 #
 
-→za-bgn-shim-list() {
+za-bgn-shim-list() {
 
 emulate -LR zsh
 setopt extended_glob warn_create_global typeset_silent \

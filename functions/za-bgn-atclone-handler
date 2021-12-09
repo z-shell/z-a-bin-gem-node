@@ -1,10 +1,8 @@
-# shellcheck shell=sh
-#
 # Copyright (c) 2019 Sebastian Gniazdowski
 # Copyright (c) 2021 Z-Shell ZI Contributors
 
 
-→za-bgn-atclone-handler() {
+za-bgn-atclone-handler() {
 
 emulate -RL zsh
 setopt extendedglob warncreateglobal typesetsilent noshortloops
@@ -45,7 +43,7 @@ if [[ -n "${ICE[gem]}" ]] {
             command gem install -q --no-user-install -i "$dir" "${gems[@]}"
         elif [[ $hook = *atpull-<-> ]]; then
             if (( !OPTS[opt_-q,--quiet] )) {
-                print -P -- "%F{38}bin-gem-node annex: %F{154}Updating the gems...%f"
+                print -P -- "%F{93}bin-gem-node annex: %F{51}Updating the gems...%f"
                 command gem update -q --no-user-install -i "$dir" "${gems[@]}"
             } else {
                 command gem update -q --no-user-install -i "$dir" "${gems[@]}" &> /dev/null
@@ -91,7 +89,7 @@ if [[ -n "${ICE[pip]}" ]] {
         (
             builtin cd -q "$dir" && {
                 if (( !OPTS[opt_-q,--quiet] )) {
-                    print -P -- "%F{38}bin-gem-node annex: %F{154}Updating the pip packages...%f"
+                    print -P -- "%F{93}bin-gem-node annex: %F{51}Updating the pip packages...%f"
                     VIRTUALENV=venv(:A) command venv/bin/pip install --upgrade "${umods[@]}"
                 } else {
                     VIRTUALENV=venv(:A) command venv/bin/pip install -q --upgrade "${umods[@]}"
@@ -136,7 +134,7 @@ if [[ -n "${ICE[node]}" ]] {
         (
             builtin cd -q "$dir" && {
                 if (( !OPTS[opt_-q,--quiet] )) {
-                    print -P -- "%F{38}bin-gem-node annex: %F{154}Updating the node modules...%f"
+                    print -P -- "%F{93}bin-gem-node annex: %F{51}Updating the node modules...%f"
                     command npm --silent update
                 } else {
                     command npm --silent update &> /dev/null
@@ -176,7 +174,7 @@ if (( ${+ICE[sbin]} )) {
                     if (( ${#files} )); then
                         sbin="${files[1]}"
                     else
-                        print -P -- "%F{38}bin-gem-node annex: %F{160}The automatic-empty sbin ice didn't find any executable files%f"
+                        print -P -- "%F{93}bin-gem-node annex: %F{160}The automatic-empty sbin ice didn't find any executable files%f"
                         break
                     fi
                 fi
@@ -203,7 +201,7 @@ if (( ${+ICE[sbin]} )) {
             eval "fnames=( ${srcdst[1]}(Nnon-.) )"
 
             if (( !${#fnames} )) {
-                print -P -- "%F{38}bin-gem-node annex: %F{160}Warning: %F{154}The sbin'' ice (\`%F{219}$sbin%F{154}') didn't match any files%f"
+                print -P -- "%F{93}bin-gem-node annex: %F{160}Warning: %F{51}The sbin'' ice (\`%F{82}$sbin%F{51}') didn't match any files%f"
                 continue
             }
 
@@ -215,7 +213,7 @@ if (( ${+ICE[sbin]} )) {
                 local file="$ZPFX/bin/$fnam"
 
                 if [[ $OSTYPE == cygwin ]]; then
-                    .za-bgn-bin-or-src-function-body-cygwin 0 \
+                    za-bgn-bin-or-src-function-body-cygwin 0 \
                                 "$fnam" \
                                 "$target_binary" "$dir" "$set_gem_home" \
                                 "$set_node_path" "$set_virtualenv" "$set_cwd" "$use_all_null" \
@@ -225,7 +223,7 @@ if (( ${+ICE[sbin]} )) {
                         command chmod +x "$file.cmd"
                 fi
 
-                .za-bgn-bin-or-src-function-body 0 \
+                za-bgn-bin-or-src-function-body 0 \
                             "$fnam" \
                             "$target_binary" "$dir" "$set_gem_home" \
                             "$set_node_path" "$set_virtualenv" "$set_cwd" "$use_all_null" \
@@ -239,13 +237,13 @@ if (( ${+ICE[sbin]} )) {
                     (( !OPTS[opt_-q,--quiet] )) && \
                         if [[ -x $target_binary ]]; then
                             if [[ $hook == atclone-<-> || $ZI[annex-multi-flag:pull-active] -ge  2 ]] {
-                                print -P -- "%F{38}bin-gem-node annex: %F{154}${${${hook:#*atclone-<->}:+Re-c}:-C}reated the %F{219}$fnam%F{154} shim and set +x on the %F{219}${target_binary:t}%F{154} binary%f"
+                                print -P -- "%F{93}bin-gem-node annex: %F{51}${${${hook:#*atclone-<->}:+Re-c}:-C}reated the %F{82}$fnam%F{51} shim and set +x on the %F{82}${target_binary:t}%F{51} binary%f"
                             }
                         else
-                            print -P -- "%F{38}bin-gem-node annex: %F{154}${${${hook:#*atclone-<->}:+Re-c}:-C}reated the %F{219}$fnam%F{154} shim %F{160}however the %F{219}${target_binary:t}%F{160} binary does not exist or failed to set +x on it%f"
+                            print -P -- "%F{93}bin-gem-node annex: %F{51}${${${hook:#*atclone-<->}:+Re-c}:-C}reated the %F{82}$fnam%F{51} shim %F{160}however the %F{82}${target_binary:t}%F{160} binary does not exist or failed to set +x on it%f"
                         fi
                 else
-                    print -P -- "%F{38}bin-gem-node annex: %F{160}Something went wrong creating the %F{219}$fnam%F{160} shim%f"
+                    print -P -- "%F{93}bin-gem-node annex: %F{160}Something went wrong creating the %F{82}$fnam%F{160} shim%f"
                 fi
             }
         }
@@ -272,9 +270,9 @@ if [[ -n "${ICE[fbin]}" ]] {
 
         if [[ -x $target_binary ]]; then
             (( !OPTS[opt_-q,--quiet] )) && \
-                print -P -- "%F{38}bin-gem-node annex: %F{154}Set +x on the %F{219}${target_binary:t}%F{154} binary%f"
+                print -P -- "%F{93}bin-gem-node annex: %F{51}Set +x on the %F{82}${target_binary:t}%F{51} binary%f"
         else
-            print -P -- "%F{38}bin-gem-node annex: %F{160}Something went wrong setting +x on the %F{219}${target_binary:t}%F{160} binary%f"
+            print -P -- "%F{93}bin-gem-node annex: %F{160}Something went wrong setting +x on the %F{82}${target_binary:t}%F{160} binary%f"
         fi
     }
 }
