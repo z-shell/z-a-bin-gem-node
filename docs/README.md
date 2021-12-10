@@ -1,26 +1,11 @@
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [How it works – bird's-eye view](#how-it-works--birds-eye-view)
-- [How it works, in detail](#how-it-works-in-detail)
-  - [The Ice Modifiers Provided By The Annex](#the-ice-modifiers-provided-by-the-annex)
-    - [The Ice Modifiers Provided By The Annex in detail](#the-ice-modifiers-provided-by-the-annex-in-detail)
-      - [`SBIN''`](#sbin)
-      - [`FBIN''`](#fbin)
-      - [`GEM''`](#gem)
-      - [`NODE''`](#node)
-      - [`PIP''`](#pip)
-      - [`FMOD''`](#fmod)
-      - [`FSCR''`](#fscr)
-      - [`FERC''`](#ferc)
-- [Additional ZI commands](#additional-zi-commands)
-- [Cygwin Support](#cygwin-support)
-
 # Introduction
 
-> **[?]**
 > This repository not compatible with previous versions (zplugin, zinit).
 >
 > Please upgrade to [ZI](https://github.com/z-shell-zi)
+>
+
+Wiki: [z-a-bin-gem-node](https://github.com/z-shell/zi/wiki/z-a-bin-gem-node)
 
 A Z-Shell ZI Annex (i.e. an extension) that provides functionality, which
 allows to:
