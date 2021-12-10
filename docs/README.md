@@ -1,8 +1,6 @@
 # Introduction
 
-> This repository not compatible with previous versions (zplugin, zinit).
->
-> Please upgrade to [ZI](https://github.com/z-shell-zi)
+> This repository not compatible with previous versions (zplugin, zinit). Please upgrade to [ZI](https://github.com/z-shell-zi)
 >
 
 **Wiki**: [z-a-bin-gem-node](https://github.com/z-shell/zi/wiki/z-a-bin-gem-node)
