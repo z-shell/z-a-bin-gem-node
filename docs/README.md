@@ -5,7 +5,7 @@
 > Please upgrade to [ZI](https://github.com/z-shell-zi)
 >
 
-Wiki: [z-a-bin-gem-node](https://github.com/z-shell/zi/wiki/z-a-bin-gem-node)
+**Wiki**: [z-a-bin-gem-node](https://github.com/z-shell/zi/wiki/z-a-bin-gem-node)
 
 A Z-Shell ZI Annex (i.e. an extension) that provides functionality, which
 allows to:
