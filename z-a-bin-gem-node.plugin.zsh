@@ -7,10 +7,6 @@
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
-if [[ $PMSPEC != *f* ]] {
-  fpath+=( "${0:h}/functions" )
-}
-
 autoload za-bgn-bin-or-src-function-body \
 za-bgn-bin-or-src-function-body-cygwin \
 za-bgn-mod-function-body \
