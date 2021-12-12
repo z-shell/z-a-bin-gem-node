@@ -6,11 +6,11 @@
 
 local name="$1" target_func="$2" dir="${3#%}"
 integer set_gem_home="$4" set_node_path="$5" set_virtualenv="$6" set_cwd="$7" \
-        use_all_null="$8" use_err_null="$9" use_out_null="$10"
+use_all_null="$8" use_err_null="$9" use_out_null="$10"
 
 if [[ "$name" = "$target_func" ]]; then
-    target_func="${target_func}--za-bgn-orig"
-    functions[$target_func]="${functions[$name]}"
+  target_func="${target_func}--za-bgn-orig"
+  functions[$target_func]="${functions[$name]}"
 fi
 
 REPLY="function $name {

@@ -174,7 +174,7 @@ if (( ${+ICE[fbin]}${+ICE[fsrc]}${+ICE[ferc]} > 0 )) {
 
         local target_binary="${${(M)srcdst[1]:#/*}:-$dir/${srcdst[1]}}"
 
-        za-bgn-bin-or-src-function-body "$run_type" \
+        .za-bgn-bin-or-src-function-body "$run_type" \
                        "${srcdst[2]:-${srcdst[1]:t}}" \
                        "$target_binary" "$dir" "$set_gem_home" \
                        "$set_node_path" "$set_virtualenv" "$set_cwd" "$use_all_null" \
@@ -213,7 +213,7 @@ if [[ -n "${ICE[fmod]}" ]] {
 
         local target_function="${srcdst[1]}"
 
-        za-bgn-mod-function-body "${srcdst[2]:-${srcdst[1]}}" \
+        .za-bgn-mod-function-body "${srcdst[2]:-${srcdst[1]}}" \
                        "$target_function" "$dir" "$set_gem_home" \
                        "$set_node_path" "$set_virtualenv" "$set_cwd" "$use_all_null" \
                        "$use_err_null" "$use_out_null"

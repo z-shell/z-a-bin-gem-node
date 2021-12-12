@@ -7,9 +7,9 @@
 0="${${ZERO:-${0:#$ZSH_ARGZERO}}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
-autoload za-bgn-bin-or-src-function-body \
-za-bgn-bin-or-src-function-body-cygwin \
-za-bgn-mod-function-body \
+autoload .za-bgn-bin-or-src-function-body \
+.za-bgn-bin-or-src-function-body-cygwin \
+.za-bgn-mod-function-body \
 za-bgn-atload-handler za-bgn-atclone-handler \
 za-bgn-atpull-handler za-bgn-help-handler \
 za-bgn-atdelete-handler \

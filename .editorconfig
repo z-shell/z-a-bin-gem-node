@@ -22,6 +22,12 @@ indent_size = 2
 tab_width = 2
 trim_trailing_whitespace = true
 
+[*za-*]
+indent_style = space
+indent_size = 2
+tab_width = 2
+trim_trailing_whitespace = true
+
 [*.{js,jsx,html,sass}]
 indent_style = tab
 indent_size = 4

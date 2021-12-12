@@ -1,13 +1,12 @@
 # Copyright (c) 2019 Sebastian Gniazdowski
 # Copyright (c) 2021 Z-Shell ZI Contributors
 #
-# FUNCTION: za-bgn-bin-or-src-function-body
+# FUNCTION: .za-bgn-bin-or-src-function-body
 # Returns the body of the function wrapping a binary
 
 local name="$2" bin="$3" dir="${4#%}"
-integer run_type="$1" set_gem_home="$5" \
-    set_node_path="$6" set_virtualenv="$7" set_cwd="$8" \
-    use_all_null="$9" use_err_null="$10" use_out_null="$11"
+integer run_type="$1" set_gem_home="$5" set_node_path="$6" set_virtualenv="$7" set_cwd="$8" \
+use_all_null="$9" use_err_null="$10" use_out_null="$11"
 
 local nl=$'\n' tab=$'    '
 
@@ -26,11 +25,11 @@ cd ${dir}"}
 "
 
 if (( run_type == 0 )); then
-    REPLY+="%bindir%\\${bint} %*"
+  REPLY+="%bindir%\\${bint} %*"
 elif (( run_type == 1 )); then
-    REPLY+="zsh -c 'source \"%bindir%\"\\\\\\\\${bint} %*'"
+  REPLY+="zsh -c 'source \"%bindir%\"\\\\\\\\${bint} %*'"
 elif (( run_type == 2 )); then
-    REPLY+="zsh -c '() { eval \"\$(<\"%bindir%\"\\\\\\\\${bint})\" } %*'"
+  REPLY+="zsh -c '() { eval \"\$(<\"%bindir%\"\\\\\\\\${bint})\" } %*'"
 fi
 
 (( use_all_null )) && REPLY+=" 2>NUL >NUL"
