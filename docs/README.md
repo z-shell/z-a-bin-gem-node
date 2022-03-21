@@ -1,6 +1,6 @@
 ## ZI Annex `BIN-GEM-NODE` 
  
- ### **Wiki**: [z-a-bin-gem-node](https://github.com/z-shell/zi/wiki/z-a-bin-gem-node)
+### 💡 [Wiki: z-a-bin-gem-node](https://z.digitalclouds.dev/docs/ecosystem/annexes/bin-gem-node)
 
 ## Introduction
 
