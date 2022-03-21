@@ -1,6 +1,15 @@
-## ZI Annex `BIN-GEM-NODE` 
- 
-### 💡 [Wiki: z-a-bin-gem-node](https://z.digitalclouds.dev/docs/ecosystem/annexes/bin-gem-node)
+<h1 align="center">
+  <a href="https://github.com/z-shell/zi">
+    <img src="https://github.com/z-shell/zi/raw/main/docs/images/logo.svg" alt="Logo" width="80" height="80" />
+  </a>
+❮ ZI ❯ Annex - bin-gem-node
+</h1>
+
+## 💡 Wiki 
+
+- [bin-gem-node](https://z.digitalclouds.dev/docs/ecosystem/annexes/bin-gem-node)
+- [annexes](https://z.digitalclouds.dev/docs/ecosystem/annexes)
+
 
 ## Introduction
 
