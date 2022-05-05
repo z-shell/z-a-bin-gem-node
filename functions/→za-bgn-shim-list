@@ -1,6 +1,8 @@
-# Copyright (c) 2019 Sebastian Gniazdowski
-# Copyright (c) 2021 Z-Shell ZI Contributors
-
+# -*- mode: zsh; sh-indentation: 2; indent-tabs-mode: nil; sh-basic-offset: 2; -*-
+# vim: ft=zsh sw=2 ts=2 et
+#
+# Copyright (c) 2021 Z-Shell Community
+#
 # Synopsis:
 #   zi shim-list [-t|--this-dir] [-c|--cat] [-i|--from-ices] \
 #		    [-o|--one-line] [-s|--short]
@@ -136,5 +138,3 @@ END
 	pr -4 -T
     }
 }
-
-# vim: ft=zsh sw=2 ts=2 et
