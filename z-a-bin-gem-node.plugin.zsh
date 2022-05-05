@@ -1,6 +1,8 @@
-# Copyright (c) 2019 Sebastian Gniazdowski
-# Copyright (c) 2021 Z-Shell ZI Contributors
-
+# -*- mode: zsh; sh-indentation: 2; indent-tabs-mode: nil; sh-basic-offset: 2; -*-
+# vim: ft=zsh sw=2 ts=2 et
+#
+# Copyright (c) 2021 Z-Shell Community
+#
 # According to the Zsh Plugin Standard:
 # https://z.digitalclouds.dev/community/zsh_plugin_standard/#zero-handling
 0="${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}"
@@ -17,8 +19,7 @@ autoload .za-bgn-bin-or-src-function-body \
 .za-bgn-mod-function-body \
 →za-bgn-atload-handler →za-bgn-atclone-handler \
 →za-bgn-atpull-handler →za-bgn-help-handler \
-→za-bgn-atdelete-handler \
-→za-bgn-shim-list
+→za-bgn-atdelete-handler →za-bgn-shim-list
 
 # An empty stub to fill the help handler fields
 →za-bgn-null-handler() { :; }
@@ -42,5 +43,3 @@ autoload .za-bgn-bin-or-src-function-body \
 @zi-register-annex "z-a-bin-gem-node" hook:atdelete-50 \
   →za-bgn-atdelete-handler \
   →za-bgn-null-handler
-
-# vim: ft=zsh sw=2 ts=2 et
