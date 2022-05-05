@@ -7,9 +7,8 @@
 
 ## 💡 Wiki 
 
-- [bin-gem-node](https://z.digitalclouds.dev/docs/ecosystem/annexes/bin-gem-node)
-- [annexes](https://z.digitalclouds.dev/docs/ecosystem/annexes)
-
+- [bin-gem-node](https://z.digitalclouds.dev/ecosystem/annexes/bin-gem-node)
+- [annexes](https://z.digitalclouds.dev/ecosystem/annexes)
 
 ## Introduction
 
