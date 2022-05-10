@@ -5,7 +5,7 @@
 ❮ ZI ❯ Annex - bin-gem-node
 </h1>
 
-## 💡 Wiki 
+## 💡 Wiki
 
 - [bin-gem-node](https://z.digitalclouds.dev/ecosystem/annexes/bin-gem-node)
 - [annexes](https://z.digitalclouds.dev/ecosystem/annexes)
