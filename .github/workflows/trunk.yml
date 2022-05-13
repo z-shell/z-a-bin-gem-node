@@ -15,6 +15,6 @@ jobs:
     name: "⚡"
     uses: z-shell/.github/.github/workflows/trunk-call.yml@main
     secrets:
-      trunk_token: ${{ secrets.TRUNK_TOKEN }}
+      trunk-token: ${{ secrets.TRUNK_TOKEN }}
     with:
       upload-series: "main"
