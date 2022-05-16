@@ -1,10 +1,11 @@
 # -*- mode: zsh; sh-indentation: 2; indent-tabs-mode: nil; sh-basic-offset: 2; -*-
 # vim: ft=zsh sw=2 ts=2 et
 #
-# Copyright (c) 2021 Z-Shell Community
+# Copyright (c) 2021-present Z-Shell Community
 
-emulate -RL zsh
-setopt extendedglob warncreateglobal typesetsilent noshortloops
+emulate -L zsh
+setopt extended_glob warn_create_global typeset_silent \
+        no_short_loops rc_quotes no_auto_pushd
 
 [[ "$1" = plugin ]] && \
   local type="$1" user="$2" plugin="$3" id_as="$4" dir="$5" hook="$6" || \
@@ -39,7 +40,7 @@ if (( ${+ICE[sbin]} )) {
           if (( ${#files} )); then
             sbin="${files[1]}"
           else
-            print -P -- "%F{93}bin-gem-node annex: %F{160}The automatic-empty sbin ice didn't find any executable files%f"
+            +zi-message "{pre}bin-gem-node annex{ehi}: {warn}The automatic-empty {ice}sbin{warn} ice didn't find any executable files.{rst}"
             break
           fi
         fi
@@ -68,12 +69,12 @@ if (( ${+ICE[sbin]} )) {
         if [[ -f $file ]]; then
           command rm -f "$file"
           if [[ -f $file ]]; then
-            print -P -- "%F{93}bin-gem-node annex: %F{160}Couldn't remove the %F{220}$fnam%F{160} shim from \$ZPFX/bin (no write access to \$ZPFX/bin?)%f"
+            +zi-message "{pre}bin-gem-node annex{ehi}: {warn}Couldn't remove the {pname}$fnam{warn} shim from \$ZPFX/bin {info2}(no write access to \$ZPFX/bin?).{rst}"
           else
-            print -P -- "%F{93}bin-gem-node annex: %F{51}Correctly removed the %F{220}$fnam%F{51} shim from \$ZPFX/bin%f" || \
+            +zi-message "{pre}bin-gem-node annex{ehi}: {ok}Correctly removed the {pname}$fnam{ok} shim from \$ZPFX/bin.{rst}" || \
           fi
         else
-          print -P -- "%F{93}bin-gem-node annex: %F{160}The %F{220}$fnam%F{160} shim didn't exist in \$ZPFX/bin (or isn't a regular file)%f"
+          +zi-message "{pre}bin-gem-node annex{ehi}: {warn}The {pname}$fnam{warn} shim didn't exist in \$ZPFX/bin {info2}(or isn't a regular file).{rst}"
         fi
       }
     }
