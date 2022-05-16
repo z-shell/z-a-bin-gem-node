@@ -1,12 +1,13 @@
 # -*- mode: zsh; sh-indentation: 2; indent-tabs-mode: nil; sh-basic-offset: 2; -*-
 # vim: ft=zsh sw=2 ts=2 et
 #
-# Copyright (c) 2021 Z-Shell Community
+# Copyright (c) 2021-present Z-Shell Community
 
 →za-bgn-atload-handler() {
 
-  emulate -RL zsh
-  setopt extendedglob warncreateglobal typesetsilent noshortloops
+emulate -L zsh
+setopt extended_glob warn_create_global typeset_silent \
+        no_short_loops rc_quotes no_auto_pushd
 
   if [[ "$1" = plugin ]] {
     local type="$1" user="$2" plugin="$3" id_as="$4" dir="${5#%}" hook="$6"
@@ -222,5 +223,3 @@
     }
   }
 }
-
-# vim: ft=zsh sw=2 ts=2 et
