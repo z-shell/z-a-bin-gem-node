@@ -1,9 +1,12 @@
-<h1 align="center">
+<div align="center" width="100%"><table><tr><td>
   <a href="https://github.com/z-shell/zi">
-    <img src="https://github.com/z-shell/zi/raw/main/docs/images/logo.svg" alt="Logo" width="80" height="80" />
+    <img src="https://github.com/z-shell/zi/raw/main/docs/images/logo.svg" alt="Logo" width="60" height="60" />
   </a>
-❮ ZI ❯ Annex - bin-gem-node
-</h1>
+<h1>❮ ZI ❯ Annex - Bin Gem Node</h1>
+ <h2>
+  <img align="center" src="https://user-images.githubusercontent.com/59910950/168638432-f4f63901-85e0-4932-a15b-325c26915d69.png" alt="annex bin-gem-node">
+ </h2></td></tr>
+</table></div>
 
 ## 💡 Wiki
 
@@ -49,5 +52,4 @@ Simply load like a regular plugin, i.e.:
 zi light z-shell/z-a-bin-gem-node
 ```
 
-After executing this command you can then use the new ice-mods provided by
-the annex.
+After executing this command you can then use the new ice-mods provided by the annex.
