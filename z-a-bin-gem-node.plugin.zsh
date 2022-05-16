@@ -14,23 +14,21 @@ if [[ $PMSPEC != *f* ]] {
 }
 
 # https://z.digitalclouds.dev/community/zsh_plugin_standard/#the-proposed-function-name-prefixes
-autoload .za-bgn-bin-or-src-function-body \
-.za-bgn-bin-or-src-function-body-cygwin \
-.za-bgn-mod-function-body \
-→za-bgn-atload-handler →za-bgn-atclone-handler \
-→za-bgn-atpull-handler →za-bgn-help-handler \
-→za-bgn-atdelete-handler →za-bgn-shim-list
+autoload -Uz .za-bgn-bin-or-src-function-body .za-bgn-bin-or-src-function-body-cygwin \
+.za-bgn-mod-function-body →za-bgn-atload-handler →za-bgn-atclone-handler \
+→za-bgn-atpull-handler →za-bgn-atdelete-handler \
+→za-bgn-help-null-handler →za-bgn-shim-list
 
 # An empty stub to fill the help handler fields
 →za-bgn-null-handler() { :; }
 
 @zi-register-annex "z-a-bin-gem-node" subcommand:shim-list \
   →za-bgn-shim-list \
-  →za-bgn-null-handler
+  →za-bgn-help-null-handler
 
 @zi-register-annex "z-a-bin-gem-node" hook:\!atload-50 \
   →za-bgn-atload-handler \
-  →za-bgn-help-handler "fbin''|sbin|sbin''|gem''|node''|pip''|fmod''|fsrc''|ferc''" # also register new ices
+  →za-bgn-null-handler "fbin''|sbin|sbin''|gem''|node''|pip''|fmod''|fsrc''|ferc''" # also register new ices
 
 @zi-register-annex "z-a-bin-gem-node" hook:atclone-50 \
   →za-bgn-atclone-handler \
