@@ -1,12 +1,12 @@
-<div align="center" width="100%"><table><tr><td>
+<div align="center"><table><tr><td>
+<h1 align="center">
   <a href="https://github.com/z-shell/zi">
     <img src="https://github.com/z-shell/zi/raw/main/docs/images/logo.svg" alt="Logo" width="60" height="60" />
   </a>
-<h1>❮ ZI ❯ Annex - Bin Gem Node</h1>
- <h2>
+❮ ZI ❯ Annex - Bin Gem Node
+</h1>
   <img align="center" src="https://user-images.githubusercontent.com/59910950/168638432-f4f63901-85e0-4932-a15b-325c26915d69.png" alt="annex bin-gem-node">
- </h2></td></tr>
-</table></div>
+</td></tr></table></div>
 
 ## 💡 Wiki
 
