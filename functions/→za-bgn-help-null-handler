@@ -1,11 +1,10 @@
 # -*- mode: zsh; sh-indentation: 2; indent-tabs-mode: nil; sh-basic-offset: 2; -*-
 # vim: ft=zsh sw=2 ts=2 et
 
-+zi-message "{nl}—— {pre}shim-list{ehi}:{rst}{nl}{nl}" \
-  "{msg}{u}Description{rst}{ehi}:{rst}{nl}" \
-  "{opt}  -h{rst}/{opt}--help{ehi}:{rst}{msg} This message.{rst}{nl}" \
-  "{opt}  -t{rst}/{opt}--this-dir{ehi}:{rst}{msg} Check shims in the current directory instead of {p}$ZPFX/bin.{rst}{nl}" \
-  "{opt}  -i{rst}/{opt}--from-ices{ehi}:{rst}{msg} Show the list of shims that results from the {ice}sbin''{msg} ice of the loaded plugins.{rst}{nl}" \
-  "{opt}  -o{rst}/{opt}--one-line{ehi}:{rst}{msg} Display the list of shim files without line breaks, in single line, after spaces. {rst}{nl}" \
-  "{opt}  -s{rst}/{opt}--short{ehi}:{rst}{msg} Exclude the plugins/snippets from showing in a list of shims. {rst}{nl}"
-  return 0
++zi-message "—— {annex}shim-list{ehi}:{rst}{nl}" \
+"{tab}{opt}[-t]{rst}{msg} – Check shims in the current directory instead of {p}$ZPFX/bin{rst}{nl}" \
+"{tab}{opt}[-i]{rst}{msg} – Show the list of shims that results from the {ice}sbin''{msg} ice of the loaded plugins{rst}{nl}" \
+"{tab}{opt}[-o]{rst}{msg} – Display the list of shim files without line breaks, in single line, after spaces{rst}{nl}" \
+"{tab}{opt}[-s]{rst}{msg} – Exclude the plugins/snippets from showing in a list of shims{rst}{nl}" \
+"{tab}{opt}[-h]{rst}{msg} – This message{rst}{nl}"
+return 0
