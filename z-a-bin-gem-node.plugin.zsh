@@ -17,14 +17,14 @@ if [[ $PMSPEC != *f* ]] {
 autoload -Uz .za-bgn-bin-or-src-function-body .za-bgn-bin-or-src-function-body-cygwin \
 .za-bgn-mod-function-body →za-bgn-atload-handler →za-bgn-atclone-handler \
 →za-bgn-atpull-handler →za-bgn-atdelete-handler \
-→za-bgn-help-null-handler →za-bgn-shim-list
+→za-bgn-help-handler →za-bgn-shim-list
 
 # An empty stub to fill the help handler fields
 →za-bgn-null-handler() { :; }
 
 @zi-register-annex "z-a-bin-gem-node" subcommand:shim-list \
   →za-bgn-shim-list \
-  →za-bgn-help-null-handler
+  →za-bgn-help-handler
 
 @zi-register-annex "z-a-bin-gem-node" hook:\!atload-50 \
   →za-bgn-atload-handler \
