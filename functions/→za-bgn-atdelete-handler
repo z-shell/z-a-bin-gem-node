@@ -4,8 +4,7 @@
 # Copyright (c) 2021-present Z-Shell Community
 
 emulate -L zsh
-setopt extended_glob warn_create_global typeset_silent \
-        no_short_loops rc_quotes no_auto_pushd
+setopt extended_glob warn_create_global typeset_silent no_short_loops rc_quotes no_auto_pushd
 
 [[ "$1" = plugin ]] && \
   local type="$1" user="$2" plugin="$3" id_as="$4" dir="$5" hook="$6" || \
@@ -40,7 +39,7 @@ if (( ${+ICE[sbin]} )) {
           if (( ${#files} )); then
             sbin="${files[1]}"
           else
-            +zi-message "{pre}bin-gem-node annex{ehi}: {warn}The automatic-empty {ice}sbin{warn} ice didn't find any executable files.{rst}"
+            +zi-message "{annex}bin-gem-node annex{ehi}: {warn}The automatic-empty {ice}sbin{warn} ice didn't find any executable files{rst}"
             break
           fi
         fi
@@ -64,17 +63,17 @@ if (( ${+ICE[sbin]} )) {
       for fname ( $fnames ) {
         srcdst[1]="$fname"
         local target_binary="${${(M)srcdst[1]:#/*}:-$dir/${srcdst[1]}}" fnam="${srcdst[2]:-${srcdst[1]:t}}"
-        local file="$ZPFX/bin/$fnam"
+        local file="${ZPFX}/bin/${fnam}"
 
         if [[ -f $file ]]; then
           command rm -f "$file"
           if [[ -f $file ]]; then
-            +zi-message "{pre}bin-gem-node annex{ehi}: {warn}Couldn't remove the {pname}$fnam{warn} shim from \$ZPFX/bin {info2}(no write access to \$ZPFX/bin?).{rst}"
+            +zi-message "{annex}bin-gem-node annex{ehi}: {warn}Couldn't remove the {pname}${fnam}{warn} shim from \$ZPFX/bin {info2}(no write access to \$ZPFX/bin?){rst}"
           else
-            +zi-message "{pre}bin-gem-node annex{ehi}: {ok}Correctly removed the {pname}$fnam{ok} shim from \$ZPFX/bin.{rst}" || \
+            +zi-message "{annex}bin-gem-node annex{ehi}: {ok}Correctly removed the {pname}${fnam}{ok} shim from \$ZPFX/bin{rst}" || \
           fi
         else
-          +zi-message "{pre}bin-gem-node annex{ehi}: {warn}The {pname}$fnam{warn} shim didn't exist in \$ZPFX/bin {info2}(or isn't a regular file).{rst}"
+          +zi-message "{annex}bin-gem-node annex{ehi}: {warn}The {pname}${fnam}{warn} shim didn't exist in \$ZPFX/bin {info2}(or isn't a regular file){rst}"
         fi
       }
     }
