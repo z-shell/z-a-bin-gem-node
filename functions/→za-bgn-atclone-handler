@@ -44,7 +44,7 @@
         command gem install -q --no-user-install -i "$dir" "${gems[@]}"
       elif [[ $hook = *atpull-<-> ]]; then
         if (( !OPTS[opt_-q,--quiet] )) {
-          print -P -- "%F{93}bin-gem-node annex: %F{51}Updating the gems...%f"
+          +zi-message "{annex}bin-gem-node annex{ehi}:{rst} Updating the gems…{rst}"
           command gem update -q --no-user-install -i "$dir" "${gems[@]}"
         } else {
           command gem update -q --no-user-install -i "$dir" "${gems[@]}" &> /dev/null
@@ -90,7 +90,7 @@
     (
       builtin cd -q "$dir" && {
         if (( !OPTS[opt_-q,--quiet] )) {
-          print -P -- "%F{93}bin-gem-node annex: %F{51}Updating the pip packages...%f"
+          +zi-message "{annex}bin-gem-node annex{ehi}:{rst} Updating the pip packages…{rst}"
           VIRTUALENV=venv(:A) command venv/bin/pip install --upgrade "${umods[@]}"
         } else {
           VIRTUALENV=venv(:A) command venv/bin/pip install -q --upgrade "${umods[@]}"
@@ -135,7 +135,7 @@
     (
       builtin cd -q "$dir" && {
         if (( !OPTS[opt_-q,--quiet] )) {
-          print -P -- "%F{93}bin-gem-node annex: %F{51}Updating the node modules...%f"
+          +zi-message "{annex}bin-gem-node annex{ehi}:{rst} Updating the node modules…{rst}"
           command npm --silent update
         } else {
           command npm --silent update &> /dev/null
@@ -175,7 +175,7 @@
             if (( ${#files} )); then
               sbin="${files[1]}"
             else
-              print -P -- "%F{93}bin-gem-node annex: %F{160}The automatic-empty sbin ice didn't find any executable files%f"
+              +zi-message "{annex}bin-gem-node annex{ehi}:{rst} {error}The automatic-empty sbin ice didn't find any executable files{rst}"
               break
             fi
           fi
@@ -202,7 +202,7 @@
         eval "fnames=( ${srcdst[1]}(Nnon-.) )"
 
         if (( !${#fnames} )) {
-          print -P -- "%F{93}bin-gem-node annex: %F{160}Warning: %F{51}The sbin'' ice (\`%F{82}$sbin%F{51}') didn't match any files%f"
+          +zi-message "{annex}bin-gem-node annex{ehi}:{rst} {error}Warning{ehi}:{rst} The {ice}sbin''{rst} ice (\`{file}${sbin}{rst}') didn't match any files{rst}"
           continue
         }
 
@@ -210,7 +210,7 @@
             srcdst[1]="$fname"
 
           local target_binary="${${(M)srcdst[1]:#/*}:-$dir/${srcdst[1]}}" fnam="${srcdst[2]:-${srcdst[1]:t}}"
-          local file="$ZPFX/bin/$fnam"
+          local file="${ZPFX}/bin/${fnam}"
 
           if [[ $OSTYPE == cygwin ]]; then
             .za-bgn-bin-or-src-function-body-cygwin 0 "$fnam" \
@@ -233,13 +233,13 @@
             (( !OPTS[opt_-q,--quiet] )) && \
               if [[ -x $target_binary ]]; then
                 if [[ $hook == atclone-<-> || $ZI[annex-multi-flag:pull-active] -ge  2 ]] {
-                  print -P -- "%F{93}bin-gem-node annex: %F{51}${${${hook:#*atclone-<->}:+Re-c}:-C}reated the %F{82}$fnam%F{51} shim and set +x on the %F{82}${target_binary:t}%F{51} binary%f"
+                  +zi-message "{annex}bin-gem-node annex{ehi}:{rst} ${${${hook:#*atclone-<->}:+Re-c}:-C}reated the {file}${fnam}{rst} shim and set {opt}+x{rst} on the {file}${target_binary:t}{rst} binary{rst}"
                 }
               else
-                print -P -- "%F{93}bin-gem-node annex: %F{51}${${${hook:#*atclone-<->}:+Re-c}:-C}reated the %F{82}$fnam%F{51} shim %F{160}however the %F{82}${target_binary:t}%F{160} binary does not exist or failed to set +x on it%f"
+                +zi-message "{annex}bin-gem-node annex{ehi}:{rst} ${${${hook:#*atclone-<->}:+Re-c}:-C}reated the {file}${fnam}{rst} shim{nl}{note}Note{ehi}:{rst} The {file}${target_binary:t}{rst} binary does not exist or failed to set {opt}+x{rst} on it{rst}"
             fi
           else
-            print -P -- "%F{93}bin-gem-node annex: %F{160}Something went wrong creating the %F{82}$fnam%F{160} shim%f"
+            +zi-message "{annex}bin-gem-node annex{ehi}:{rst} {error}Something went wrong creating the {file}${fnam}{error} shim{rst}"
           fi
           }
         }
@@ -266,9 +266,9 @@
 
       if [[ -x $target_binary ]]; then
         (( !OPTS[opt_-q,--quiet] )) && \
-        print -P -- "%F{93}bin-gem-node annex: %F{51}Set +x on the %F{82}${target_binary:t}%F{51} binary%f"
+        +zi-message "{annex}bin-gem-node annex{ehi}:{rst} Set {opt}+x{rst} on the {file}${target_binary:t}{rst} binary"
       else
-        print -P -- "%F{93}bin-gem-node annex: %F{160}Something went wrong setting +x on the %F{82}${target_binary:t}%F{160} binary%f"
+        +zi-message "{annex}bin-gem-node annex{ehi}:{rst} {error}Something went wrong while setting {opt}+x{error} on the {file}${target_binary:t}{error} binary" 
       fi
     }
   }
