@@ -1,7 +1,7 @@
 # -*- mode: zsh; sh-indentation: 2; indent-tabs-mode: nil; sh-basic-offset: 2; -*-
 # vim: ft=zsh sw=2 ts=2 et
 
-+zi-message "—— {annex}shim-list{ehi}:{rst}{nl}" \
++zi-message "—— {annex}shim-list{nl}" \
 "{tab}{opt}[-t]{rst}{msg} – Check shims in the current directory instead of {p}$ZPFX/bin{rst}{nl}" \
 "{tab}{opt}[-i]{rst}{msg} – Show the list of shims that results from the {ice}sbin''{msg} ice of the loaded plugins{rst}{nl}" \
 "{tab}{opt}[-o]{rst}{msg} – Display the list of shim files without line breaks, in single line, after spaces{rst}{nl}" \
