@@ -44,7 +44,7 @@ allows to:
 6. Automatic updates of Ruby gems and Node modules during regular plugin and
    snippet updates with `zi update …`.
 
-# Installation
+# Install
 
 Simply load like a regular plugin, i.e.:
 
