@@ -27,7 +27,7 @@
   }
 
   if (( ${#opt_help} )) {
-    →za-bgn-help-null-handler
+    →za-bgn-help-handler
     return $?
   }
 
@@ -111,9 +111,9 @@
         }
       }
     }
-  } | if (( !${#opt_short} || ${#opt_one_line} )) {
-		cat
-	} else {
-		pr -4 -T
-	}
+    } | if (( !${#opt_short} || ${#opt_one_line} )) {
+      cat
+	  } else {
+		  pr -4 -T
+	  }
 }
