@@ -5,27 +5,33 @@
 #
 # Returns the body of the function wrapping a function
 
-local name="$1" target_func="$2" dir="${3#%}"
-integer set_gem_home="$4" set_node_path="$5" set_virtualenv="$6" set_cwd="$7" \
-use_all_null="$8" use_err_null="$9" use_out_null="$10"
+.za-bgn-mod-function-body() {
 
-if [[ "$name" = "$target_func" ]]; then
-  target_func="${target_func}--za-bgn-orig"
-  functions[$target_func]="${functions[$name]}"
-fi
+  builtin emulate -L zsh ${=${options[xtrace]:#off}:+-o xtrace}
+  builtin setopt extended_glob warn_create_global typeset_silent no_short_loops rc_quotes no_auto_pushd
 
-REPLY="function $name {
-${${(M)set_gem_home:#1}:+local -x GEM_HOME=${(qqq)dir}}
-${${(M)set_node_path:#1}:+local -x NODE_PATH=${(qqq)dir}/node_modules}
-${${(M)set_virtualenv:#1}:+local -x VIRTUALENV=${(qqq)dir}/venv}
-${${(M)set_cwd:#1}:+"local oldpwd=${(qqq)PWD}
-() { setopt localoptions noautopushd; builtin cd -q ${(qqq)dir}; }"}
-${(qqq)target_func} \"\$@\""
+  local name="$1" target_func="$2" dir="${3#%}"
+  integer set_gem_home="$4" set_node_path="$5" set_virtualenv="$6" set_cwd="$7" \
+  use_all_null="$8" use_err_null="$9" use_out_null="$10"
 
-(( use_all_null )) && REPLY+=" &>/dev/null"
-(( use_err_null )) && REPLY+=" 2>/dev/null"
-(( use_out_null )) && REPLY+=" >/dev/null"
+  if [[ "$name" = "$target_func" ]]; then
+    target_func="${target_func}--za-bgn-orig"
+    functions[$target_func]="${functions[$name]}"
+  fi
 
-REPLY+="$nl"
-REPLY+="${${(M)set_cwd:#1}:+"() { builtin setopt localoptions noautopushd; builtin cd -q \"\$oldpwd\"; }"}
-}"
+  REPLY="function $name {
+  ${${(M)set_gem_home:#1}:+local -x GEM_HOME=${(qqq)dir}}
+  ${${(M)set_node_path:#1}:+local -x NODE_PATH=${(qqq)dir}/node_modules}
+  ${${(M)set_virtualenv:#1}:+local -x VIRTUALENV=${(qqq)dir}/venv}
+  ${${(M)set_cwd:#1}:+"local oldpwd=${(qqq)PWD}
+  () { setopt localoptions noautopushd; builtin cd -q ${(qqq)dir}; }"}
+  ${(qqq)target_func} \"\$@\""
+
+  (( use_all_null )) && REPLY+=" &>/dev/null"
+  (( use_err_null )) && REPLY+=" 2>/dev/null"
+  (( use_out_null )) && REPLY+=" >/dev/null"
+
+  REPLY+="$nl"
+  REPLY+="${${(M)set_cwd:#1}:+"() { builtin setopt localoptions noautopushd; builtin cd -q \"\$oldpwd\"; }"}
+  }"
+}

@@ -10,109 +10,108 @@
 
 →za-bgn-shim-list() {
 
-builtin emulate -L zsh ${=${options[xtrace]:#off}:+-o xtrace}
-builtin setopt extended_glob warn_create_global typeset_silent no_short_loops rc_quotes no_auto_pushd
+  builtin emulate -L zsh ${=${options[xtrace]:#off}:+-o xtrace}
+  builtin setopt extended_glob warn_create_global typeset_silent no_short_loops rc_quotes no_auto_pushd
 
-autoload is-at-least
-local is_58
-is-at-least 5.8 && is_58=1
+  autoload is-at-least
+  local is_58
+  is-at-least 5.8 && is_58=1
 
-local -a opt_help opt_this_dir opt_cat opt_from_ices opt_one_line opt_short
-zparseopts -D -E ${is_58:+-F} h=opt_help -help=opt_help t=opt_this_dir \
--this-dir=opt_this_dir c=opt_cat -cat=opt_cat i=opt_from_ices -from-ices=opt_from_ices s=opt_short \
--short=opt_short o=opt_one_line -one-line=opt_one_line || {
-  +zi-message "{error}Error:{msg2}" "Incorrect options given to" "{obj}shim-list{msg2}, \
-  try" "{obj}--help{rst}"
-  return 1
-}
+  local -a opt_help opt_this_dir opt_cat opt_from_ices opt_one_line opt_short
+  zparseopts -D -E ${is_58:+-F} h=opt_help -help=opt_help t=opt_this_dir \
+  -this-dir=opt_this_dir c=opt_cat -cat=opt_cat i=opt_from_ices -from-ices=opt_from_ices s=opt_short \
+  -short=opt_short o=opt_one_line -one-line=opt_one_line || {
+    +zi-message "{error}Error:{msg2}" "Incorrect options given to" "{obj}shim-list{msg2}, \
+    try" "{obj}--help{rst}"
+    return 1
+  }
 
-if (( ${#opt_help} )) {
-  →za-bgn-help-null-handler
-  return $?
-}
+  if (( ${#opt_help} )) {
+    →za-bgn-help-null-handler
+    return $?
+  }
 
-(( !${+functions[.zi-any-colorify-as-uspl2]} )) && builtin source $ZI[BIN_DIR]/lib/zsh/side.zsh
+  (( !${+functions[.zi-any-colorify-as-uspl2]} )) && builtin source $ZI[BIN_DIR]/lib/zsh/side.zsh
 
-# To `cat`… or `pr`…:
-{
+  # To `cat`… or `pr`…:
+  {
 
-  if (( !${#opt_from_ices} )) {
-    local nl=$'\n' brace='{' quote='"'
-    local pattern='(#s)\#!/usr/bin/env zsh
+    if (( !${#opt_from_ices} )) {
+      local nl=$'\n' brace='{' quote='"'
+      local pattern='(#s)\#!/usr/bin/env zsh
 
-    function * {
-    local bindir="'
+      function * {
+      local bindir="'
 
-    local -a cands
-    cands=( ${${opt_this_dir:+.}:-$ZPFX/bin}/*(.-NDL-1000) )
-    cands=( ${cands:#.} )
+      local -a cands
+      cands=( ${${opt_this_dir:+.}:-$ZPFX/bin}/*(.-NDL-1000) )
+      cands=( ${cands:#.} )
 
-    local rempat="(${ZI[PLUGINS_DIR]}|${ZI[SNIPPETS_DIR]}"
-    rempat+="|${ZI[PLUGINS_DIR]/.zi/.zplugin}"
-    rempat+="|${ZI[SNIPPETS_DIR]/.zi/.zplugin})"
-    local snippat="(${ZI[SNIPPETS_DIR]}|${ZI[SNIPPETS_DIR]/.zi/.zplugin})/*"
+      local rempat="(${ZI[PLUGINS_DIR]}|${ZI[SNIPPETS_DIR]}"
+      rempat+="|${ZI[PLUGINS_DIR]/.zi/.zplugin}"
+      rempat+="|${ZI[SNIPPETS_DIR]/.zi/.zplugin})"
+      local snippat="(${ZI[SNIPPETS_DIR]}|${ZI[SNIPPETS_DIR]/.zi/.zplugin})/*"
 
-    local file
-    local -a found
-    integer longest len
-    for file ( $cands ) {
-      local body="$(<$file)"
-        if [[ -n ${body[(r)$pattern]} ]] {
-          len=${#${file:t}}
-          (( len > longest )) && longest=len
-          found+=( $file )
+      local file
+      local -a found
+      integer longest len
+      for file ( $cands ) {
+        local body="$(<$file)"
+          if [[ -n ${body[(r)$pattern]} ]] {
+            len=${#${file:t}}
+            (( len > longest )) && longest=len
+            found+=( $file )
+          }
+      }
+
+      for file ( $found ) {
+        local body="$(<$file)" name=$file:t
+        print -r ${${:-$opt_one_line${(M)${opt_short:-1}:#1}}:+-n} -- ${file:t}" " \
+        ${${(M)${opt_short:-1}:#1}:+${(l:longest+1-${#name}:: :):-}}
+
+        if (( !${#opt_short} )) {
+          if [[ $body = (#b)$~pattern([^$nl]##)$nl* ]] {
+            local pth=${match[1]%\"}
+            local id_as=${${${pth##$~rempat}##/##}%\"}
+            if [[ $pth = $~snippat ]] {
+              if [[ $id_as = ((OMZ|PZT|PZTM|OMZP|OMZT|OMZL)::|(#i)(http(s|)|ftp(s|)|rsync|ssh)--)* ]] {
+              { local url="$(<$pth/._zi/url)" } 2>/dev/null
+            } else {
+                local -A map
+                map=( -- "/" -EQ- "=" -QM- "?" -AMP- "&" )
+                local url=${id_as//(#m)(${(~j:|:k)map})/${map[$MATCH]}}
+            }
+              print -r "$ZI[col-obj]$url$ZI[col-rst]"
+              } else {
+            (( ${+functions[.zi-first]} )) || builtin source "${ZI[BIN_DIR]}/lib/zsh/side.zsh"
+            .zi-any-colorify-as-uspl2 "$id_as"
+            print -r -- "$REPLY"
+            }
+          }
         }
-    }
+      }
+      (( ${#opt_one_line} )) && print
 
-  for file ( $found ) {
-    local body="$(<$file)" name=$file:t
-    print -r ${${:-$opt_one_line${(M)${opt_short:-1}:#1}}:+-n} -- ${file:t}" " \
-    ${${(M)${opt_short:-1}:#1}:+${(l:longest+1-${#name}:: :):-}}
-
-    if (( !${#opt_short} )) {
-      if [[ $body = (#b)$~pattern([^$nl]##)$nl* ]] {
-        local pth=${match[1]%\"}
-        local id_as=${${${pth##$~rempat}##/##}%\"}
-        if [[ $pth = $~snippat ]] {
-          if [[ $id_as = ((OMZ|PZT|PZTM|OMZP|OMZT|OMZL)::|(#i)(http(s|)|ftp(s|)|rsync|ssh)--)* ]] {
-          { local url="$(<$pth/._zi/url)" } 2>/dev/null
-        } else {
-            local -A map
-            map=( -- "/" -EQ- "=" -QM- "?" -AMP- "&" )
-            local url=${id_as//(#m)(${(~j:|:k)map})/${map[$MATCH]}}
-        }
-          print -r "$ZI[col-obj]$url$ZI[col-rst]"
-          } else {
-        (( ${+functions[.zi-first]} )) || builtin source "${ZI[BIN_DIR]}/lib/zsh/side.zsh"
-        .zi-any-colorify-as-uspl2 "$id_as"
-        print -r -- "$REPLY"
+    } else {
+      +zi-message "{info}Listing shims basing on the in-memory ices data...{rst}"
+      local p
+      local -A ices
+      for p ( $ZI_REGISTERED_PLUGINS ) {
+        if [[ -n $ZI_SICE[$p] ]] {
+          ices=( "${(@Q)${(@z)ZI_SICE[$p]}}" )
+          local sbin
+          local -a sbins
+          sbins=( ${(s.;.)ices[sbin]} )
+          if (( ${#sbins} )) {
+            .zi-any-colorify-as-uspl2 "$p"
+          }
+          for sbin ( $sbins ) {
+            print "${(r:50:: :)sbin} $REPLY"
+          }
         }
       }
     }
-  }
-  (( ${#opt_one_line} )) && print
-
-  } else {
-    +zi-message "{info}Listing shims basing on the in-memory ices data...{rst}"
-    local p
-    local -A ices
-    for p ( $ZI_REGISTERED_PLUGINS ) {
-      if [[ -n $ZI_SICE[$p] ]] {
-        ices=( "${(@Q)${(@z)ZI_SICE[$p]}}" )
-        local sbin
-        local -a sbins
-        sbins=( ${(s.;.)ices[sbin]} )
-        if (( ${#sbins} )) {
-          .zi-any-colorify-as-uspl2 "$p"
-        }
-        for sbin ( $sbins ) {
-          print "${(r:50:: :)sbin} $REPLY"
-        }
-      }
-    }
-  }
-
-} | if (( !${#opt_short} || ${#opt_one_line} )) { 
+  } | if (( !${#opt_short} || ${#opt_one_line} )) {
 		cat
 	} else {
 		pr -4 -T

@@ -6,38 +6,44 @@
 # FUNCTION: .za-bgn-bin-or-src-function-body
 # Returns the body of the function wrapping a binary
 
-local name="$2" bin="$3" dir="${4#%}"
-integer run_type="$1" set_gem_home="$5" set_node_path="$6" set_virtualenv="$7" set_cwd="$8" \
-use_all_null="$9" use_err_null="$10" use_out_null="$11"
+.za-bgn-bin-or-src-function-body-cygwin() {
 
-local nl=$'\n' tab=$'    '
+  builtin emulate -L zsh ${=${options[xtrace]:#off}:+-o xtrace}
+  builtin setopt extended_glob warn_create_global typeset_silent no_short_loops rc_quotes no_auto_pushd
 
-dir=$(cygpath -w "$dir")
-local binh=$(command cygpath -w "${bin:h}") bint=$(command cygpath -w "${bin:t}")
+  local name="$2" bin="$3" dir="${4#%}"
+  integer run_type="$1" set_gem_home="$5" set_node_path="$6" set_virtualenv="$7" set_cwd="$8" \
+  use_all_null="$9" use_err_null="$10" use_out_null="$11"
 
-REPLY="
-@echo off
-set bindir=${binh}
-${${(M)set_gem_home:#1}:+set GEM_HOME=${dir}}
-${${(M)set_node_path:#1}:+set NODE_PATH=${dir}\\node_modules}
-${${(M)set_virtualenv:#1}:+set VIRTUALENV=${dir}\\venv}
-set PATH=${${(M)set_node_path:#1}:+${dir}\node_modules\.bin;}${${(M)set_virtualenv:#1}:+${dir}\venv\bin;}${${(M)set_gem_home:#1}:+${dir}\\bin;}%bindir%;%PATH%
-${${(M)set_cwd:#1}:+"set oldpwd=%cd%
-cd ${dir}"}
-"
+  local nl=$'\n' tab=$'    '
 
-if (( run_type == 0 )); then
-  REPLY+="%bindir%\\${bint} %*"
-elif (( run_type == 1 )); then
-  REPLY+="zsh -c 'source \"%bindir%\"\\\\\\\\${bint} %*'"
-elif (( run_type == 2 )); then
-  REPLY+="zsh -c '() { eval \"\$(<\"%bindir%\"\\\\\\\\${bint})\" } %*'"
-fi
+  dir=$(cygpath -w "$dir")
+  local binh=$(command cygpath -w "${bin:h}") bint=$(command cygpath -w "${bin:t}")
 
-(( use_all_null )) && REPLY+=" 2>NUL >NUL"
-(( use_err_null )) && REPLY+=" 2>NUL"
-(( use_out_null )) && REPLY+=" >NUL"
+  REPLY="
+  @echo off
+  set bindir=${binh}
+  ${${(M)set_gem_home:#1}:+set GEM_HOME=${dir}}
+  ${${(M)set_node_path:#1}:+set NODE_PATH=${dir}\\node_modules}
+  ${${(M)set_virtualenv:#1}:+set VIRTUALENV=${dir}\\venv}
+  set PATH=${${(M)set_node_path:#1}:+${dir}\node_modules\.bin;}${${(M)set_virtualenv:#1}:+${dir}\venv\bin;}${${(M)set_gem_home:#1}:+${dir}\\bin;}%bindir%;%PATH%
+  ${${(M)set_cwd:#1}:+"set oldpwd=%cd%
+  cd ${dir}"}
+  "
 
-REPLY+="$nl"
-REPLY+="${${(M)set_cwd:#1}:+"${nl}cd %oldpwd%"
-}"
+  if (( run_type == 0 )); then
+    REPLY+="%bindir%\\${bint} %*"
+  elif (( run_type == 1 )); then
+    REPLY+="zsh -c 'source \"%bindir%\"\\\\\\\\${bint} %*'"
+  elif (( run_type == 2 )); then
+    REPLY+="zsh -c '() { eval \"\$(<\"%bindir%\"\\\\\\\\${bint})\" } %*'"
+  fi
+
+  (( use_all_null )) && REPLY+=" 2>NUL >NUL"
+  (( use_err_null )) && REPLY+=" 2>NUL"
+  (( use_out_null )) && REPLY+=" >NUL"
+
+  REPLY+="$nl"
+  REPLY+="${${(M)set_cwd:#1}:+"${nl}cd %oldpwd%"
+  }"
+}
