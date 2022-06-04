@@ -27,5 +27,5 @@ ${(qqq)target_func} \"\$@\""
 (( use_out_null )) && REPLY+=" >/dev/null"
 
 REPLY+="$nl"
-REPLY+="${${(M)set_cwd:#1}:+"() { setopt localoptions noautopushd; builtin cd -q \"\$oldpwd\"; }"}
+REPLY+="${${(M)set_cwd:#1}:+"() { builtin setopt localoptions noautopushd; builtin cd -q \"\$oldpwd\"; }"}
 }"
