@@ -4,6 +4,7 @@
     <img align="center" src="https://github.com/z-shell/zi/raw/main/docs/images/logo.svg" alt="Logo" width="60px" height="60px" />
   </a> ❮ ZI ❯ Annex - Bin Gem Node </h1>
   <h2>
+    <p> An annex delivers extra installation capabilities</p>
     <p><img align="center" src="https://user-images.githubusercontent.com/59910950/168638432-f4f63901-85e0-4932-a15b-325c26915d69.png" alt="zi annex bin-gem-node" width="100%" height="auto" /></p>
 </h2></td></tr></table></div><hr />
 
