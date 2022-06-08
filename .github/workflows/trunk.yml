@@ -6,8 +6,6 @@ on:
     tags: ["v*.*.*"]
   pull_request:
     types: [opened, synchronize]
-  #  schedule:
-  #    - cron: 0 04 * * 1-5
   workflow_dispatch: {}
 
 jobs:
@@ -17,4 +15,5 @@ jobs:
     secrets:
       trunk-token: ${{ secrets.TRUNK_TOKEN }}
     with:
-      upload-series: "main"
+      upload-series: main
+      arguments: --ci-progress
