@@ -17,7 +17,7 @@ Simply load like a regular plugin, i.e.:
 zi light z-shell/z-a-bin-gem-node
 ```
 
-After executing this command you can then use the new ice-modfier provided by the annex.
+After executing this command you can then use the new ice-modifier provided by the annex.
 
 ---
 
