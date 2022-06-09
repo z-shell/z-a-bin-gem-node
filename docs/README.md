@@ -20,8 +20,8 @@ Simply load like a regular plugin, i.e.:
 zi light z-shell/z-a-bin-gem-node
 ```
 
-After executing this command you can then use the new ice-modifier provided by the annex.
+After executing this command you can then use the new ice modifier and subcommand provided by the annex.
 
 ---
 
-This repository compatible with [ZI](https://github.com/z-shell/zi)
+This repository is compatible with [ZI](https://github.com/z-shell/zi)
