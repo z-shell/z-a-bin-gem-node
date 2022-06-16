@@ -15,7 +15,7 @@ lint:
     - actionlint@1.6.13
     - gitleaks@8.8.7
     - markdownlint@0.31.1
-    - prettier@2.6.2
+    - prettier@2.7.1
   ignore:
     - linters: [ALL]
       paths:
