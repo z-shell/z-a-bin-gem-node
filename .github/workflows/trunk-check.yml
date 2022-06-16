@@ -12,8 +12,3 @@ jobs:
   check:
     name: "⚡"
     uses: z-shell/.github/.github/workflows/trunk.yml@main
-    secrets:
-      trunk-token: ${{ secrets.TRUNK_TOKEN }}
-    with:
-      upload-series: main
-      arguments: --ci-progress
