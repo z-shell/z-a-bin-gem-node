@@ -2,11 +2,11 @@
 # vim: ft=zsh sw=2 ts=2 et
 
 →za-bgn-help-handler() {
-  +zi-message "—— {annex}shim-list{nl}" \
-  "{tab}{opt}[-t]{rst}{msg} – Check shims in the current directory instead of {p}$ZPFX/bin{rst}{nl}" \
-  "{tab}{opt}[-i]{rst}{msg} – Show the list of shims that results from the {ice}sbin''{msg} ice of the loaded plugins{rst}{nl}" \
-  "{tab}{opt}[-o]{rst}{msg} – Display the list of shim files without line breaks, in single line, after spaces{rst}{nl}" \
-  "{tab}{opt}[-s]{rst}{msg} – Exclude the plugins/snippets from showing in a list of shims{rst}{nl}" \
-  "{tab}{opt}[-h]{rst}{msg} – This message{rst}{nl}"
-  return 0
+  +zi-message "{auto} —— shim-list [ -t | -i | -o | -s | -h ] {nl}" \
+    "{auto}[ -t ] —— Check shims in the current directory instead of {dir} \$ZPFX/bin {nl}" \
+    "{auto}[ -i ] —— Show the list of shims that results from the sbin ice of the loaded plugins {nl}" \
+    "{auto}[ -o ] —— Display the list of shim files without line breaks, in single line, after spaces {nl}" \
+    "{auto}[ -s ] —— Exclude the plugin or snippet from showing in a list of shims {nl}" \
+    "{auto}[ -h ] —— This message {nl}"
+    return 0
 }

@@ -43,7 +43,7 @@
       @zi-substitute 'srcdst[1]' 'srcdst[2]' 'srcdst[3]'
 
       if (( add_fbin )); then
-        local target_binary="g:$dir/bin/${srcdst[1]}"
+        local target_binary="g:${dir}/bin/${srcdst[1]}"
         ICE[fbin]+="${ICE[fbin]:+;}$target_binary -> ${srcdst[3]}"
       fi
     }
@@ -76,7 +76,7 @@
       @zi-substitute 'srcdst[1]' 'srcdst[2]' 'srcdst[3]'
 
       if (( add_fbin )); then
-        local target_binary="n:$dir/node_modules/.bin/${srcdst[1]}"
+        local target_binary="n:${dir}/node_modules/.bin/${srcdst[1]}"
         ICE[fbin]+="${ICE[fbin]:+;}$target_binary -> ${srcdst[3]}"
       fi
     }
@@ -109,7 +109,7 @@
       @zi-substitute 'srcdst[1]' 'srcdst[2]' 'srcdst[3]'
 
       if (( add_fbin )); then
-        local target_binary="p:$dir/venv/bin/${srcdst[1]}"
+        local target_binary="p:${dir}/venv/bin/${srcdst[1]}"
         ICE[fbin]+="${ICE[fbin]:+;}$target_binary -> ${srcdst[3]}"
       fi
     }
@@ -139,19 +139,19 @@
       if [[ ( ${+ICE[fbin]} -eq 1 && run_type -eq 0 && -z $fbin && ${#fbins} -eq 0 ) || \
         ( ${+ICE[fsrc]} -eq 1 && run_type -eq 1 && -z $fbin && ${#fsrcs} -eq 0 ) || \
         ( ${+ICE[ferc]} -eq 1 && run_type -eq 2 && -z $fbin && ${#fercs} -eq 0 ) ]]; then
-          if [[ -f $dir/${id_as:t} ]]; then
-            fbin="$dir/${id_as:t}"
-          elif [[ -n $plugin && -f $dir/$plugin ]]; then
-            fbin="$dir/$plugin"
-          elif [[ -n $url && -f $dir/${url:t} ]]; then
-            fbin="$dir/${url:t}"
+          if [[ -f ${dir}/${id_as:t} ]]; then
+            fbin="${dir}/${id_as:t}"
+          elif [[ -n $plugin && -f ${dir}/${plugin} ]]; then
+            fbin="${dir}/${plugin}"
+          elif [[ -n $url && -f ${dir}/${url:t} ]]; then
+            fbin="${dir}/${url:t}"
           else
             local -a files
-            files=( $dir/*(*Non:t) )
+            files=( ${dir}/*(*Non:t) )
             if (( ${#files} )); then
               fbin="${files[1]}"
             else
-              +zi-message "{annex}bin-gem-node annex{ehi}:{rst} {error}The automatic-empty fbin ice didn't find any executable files for {id-as}${id_as}{rst}"              break
+              +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} {error}The automatic-empty {ice}fbin{rst} {cmd}ice{error} didn't find any executable files for {id-as}${id_as}{rst}"              break
             fi
           fi
       elif [[ -z $fbin ]]; then
@@ -172,7 +172,7 @@
       # Substitute the standard keywords and param''-s
       @zi-substitute 'srcdst[1]' 'srcdst[2]'
 
-      local target_binary="${${(M)srcdst[1]:#/*}:-$dir/${srcdst[1]}}"
+      local target_binary="${${(M)srcdst[1]:#/*}:-${dir}/${srcdst[1]}}"
 
       .za-bgn-bin-or-src-function-body "$run_type" "${srcdst[2]:-${srcdst[1]:t}}" "$target_binary" "$dir" "$set_gem_home" \
       "$set_node_path" "$set_virtualenv" "$set_cwd" "$use_all_null" "$use_err_null" "$use_out_null"

@@ -21,8 +21,7 @@
   zparseopts -D -E ${is_58:+-F} h=opt_help -help=opt_help t=opt_this_dir \
   -this-dir=opt_this_dir c=opt_cat -cat=opt_cat i=opt_from_ices -from-ices=opt_from_ices s=opt_short \
   -short=opt_short o=opt_one_line -one-line=opt_one_line || {
-    +zi-message "{error}Error:{msg2}" "Incorrect options given to" "{obj}shim-list{msg2}, \
-    try" "{obj}--help{rst}"
+    +zi-message "{error}Error{ehi}: {auto}Incorrect options given, try shim-list -h for available options"
     return 1
   }
 
@@ -31,7 +30,7 @@
     return $?
   }
 
-  (( !${+functions[.zi-any-colorify-as-uspl2]} )) && builtin source $ZI[BIN_DIR]/lib/zsh/side.zsh
+  (( !${+functions[.zi-any-colorify-as-uspl2]} )) && builtin source ${ZI[BIN_DIR]}/lib/zsh/side.zsh
 
   # To `cat`… or `pr`…:
   {
@@ -93,7 +92,7 @@
       (( ${#opt_one_line} )) && print
 
     } else {
-      +zi-message "{info}Listing shims basing on the in-memory ices data...{rst}"
+      +zi-message "{auto}Listing shims basing on the in-memory ices data ..."
       local p
       local -A ices
       for p ( $ZI_REGISTERED_PLUGINS ) {
@@ -111,9 +110,9 @@
         }
       }
     }
-    } | if (( !${#opt_short} || ${#opt_one_line} )) {
-      cat
-	  } else {
-		  pr -4 -T
-	  }
+  } | if (( !${#opt_short} || ${#opt_one_line} )) {
+        cat
+      } else {
+        pr -4 -T
+      }
 }
