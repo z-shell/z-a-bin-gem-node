@@ -37,12 +37,10 @@ i18n 🌐:
   - "i18n/**"
   - "docs/i18n/**"
 annex 🌀:
-  - "*"
+  - "functions/→za**"
+plugin ⚙️:
+  - "*.zsh"
 #package 📦:
-#  - 'ecosystem/packages/**/*.md'
-#  - 'i18n/**/docusaurus-plugin-content-ecosystem/**/packages/**/*.md'
-#plugin ⚙️:
-#  - 'ecosystem/plugins/**.md'
-#  - 'i18n/**/docusaurus-plugin-content-ecosystem/**/plugins/**/*.md'
+#  - 'package.json'
 ci 🤖:
   - ".github/workflows/*"
