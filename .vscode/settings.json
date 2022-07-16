@@ -1,10 +1,18 @@
 {
-  "conventionalCommits.scopes": ["maintenance", "workspace", "community", "general", "theme", "CI"],
+  "conventionalCommits.scopes": [
+    "maintenance",
+    "workspace",
+    "community",
+    "general",
+    "misc"
+  ],
   "markdownlint.config": {
     "extends": ".github/.markdownlint.yaml"
   },
+  "prettier.configPath": ".github/.prettierrc",
+  "shellformat.useEditorConfig": true,
   "files.associations": {
-    "*za-default*": "zsh"
+    "*za-*": "shellscript"
   },
   "shellcheck.ignorePatterns": {
     "**/*.xonshrc": true,
@@ -22,6 +30,5 @@
     "**/zshenv": true,
     "**/*.zsh-theme": true,
     "**/*za-*": true
-  },
-  "shellformat.useEditorConfig": true
+  }
 }

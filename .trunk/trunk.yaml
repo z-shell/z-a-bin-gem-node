@@ -1,6 +1,6 @@
 version: 0.1
 cli:
-  version: 0.14.1-beta
+  version: 0.15.0-beta
 repo:
   repo:
     host: github.com
@@ -8,15 +8,24 @@ repo:
     name: z-a-bin-gem-node
 lint:
   linters:
+    - name: zsh-n
+      files: [ALL]
+      type: pass_fail
+      command: [zsh, -c, -n, "functions/${target} 2>&1"]
+      success_codes: [0, 1]
+      environment:
+        - name: PATH
+          list: ["${env.PATH}"]
     - name: markdownlint
-      command: [markdownlint, -q, --config, .trunk/.markdownlint.yaml, "${target}"]
-      direct_configs: [.trunk/.markdownlint.yaml]
+      command: [markdownlint, -q, --config, .github/.markdownlint.yaml, "${target}"]
+      direct_configs: [.github/.markdownlint.yaml]
+    - name: prettier
+      command: [prettier, -q, --config, .github/.prettierrc, "${target}"]
+      direct_configs: [.github/.prettierrc]
   enabled:
+    - git-diff-check@SYSTEM
     - actionlint@1.6.15
-    - gitleaks@8.8.11
+    - gitleaks@8.8.12
     - markdownlint@0.31.1
     - prettier@2.7.1
-  ignore:
-    - linters: [ALL]
-      paths:
-        - "functions/**"
+    - shfmt@3.5.0

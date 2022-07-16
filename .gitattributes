@@ -1,5 +1,5 @@
+* text=auto
 *.md diff=markdown
-*.zsh diff=zsh
-∧* diff=zsh
-*za-* diff=zsh
-z-a* diff=zsh
+_zi* text eol=lf diff=zsh
+*.zsh text eol=lf diff=zsh
+*za-* text eol=lf diff=zsh
