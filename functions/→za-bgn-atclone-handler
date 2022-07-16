@@ -5,7 +5,6 @@
 # Copyright (c) 2021 Z-Shell Community
 
 →za-bgn-atclone-handler() {
-
   builtin emulate -L zsh ${=${options[xtrace]:#off}:+-o xtrace}
   builtin setopt extended_glob warn_create_global typeset_silent no_short_loops rc_quotes no_auto_pushd
 
@@ -233,13 +232,13 @@
             (( !OPTS[opt_-q,--quiet] )) && \
               if [[ -x $target_binary ]]; then
                 if [[ $hook == atclone-<-> || $ZI[annex-multi-flag:pull-active] -ge  2 ]] {
-                  +zi-message "{annex}bin-gem-node-annex{ehi}: {auto}${${${hook:#*atclone-<->}:+Re-c}:-C}reated the $fnam shim and set \`+x\` on the ${target_binary:t} binary"
+                  +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} ${${${hook:#*atclone-<->}:+Re-c}:-C}reated the {pname}$fnam{rst} shim and set {auto}\`+x\`{rst} on the {pname}${target_binary:t}{rst} binary"
                 }
               else
-                +zi-message "{annex}bin-gem-node-annex{ehi}: {auto}${${${hook:#*atclone-<->}:+Re-c}:-C}reated the $fnam shim{nl}{note}Note{ehi}: {auto}The ${target_binary:t} binary does not exist or failed to set \`+x\` on it"
+                +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} ${${${hook:#*atclone-<->}:+Re-c}:-C}reated the {pname}$fnam{rst} shim{nl}{mmdsh}{rst} The {pname}${target_binary:t}{rst} binary does not exist or failed to set {auto}\`+x\` on it"
               fi
           else
-            +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} {error}Something went wrong creating the {pname}${fnam}{error} shim {…}{rst}"
+            +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} {error}Something went wrong creating the {pname}$fnam{error} shim {…}{rst}"
           fi
           }
         }
@@ -266,9 +265,9 @@
 
       if [[ -x $target_binary ]]; then
         (( !OPTS[opt_-q,--quiet] )) && \
-        +zi-message "{annex}bin-gem-node-annex{ehi}: {auto}Set \`+x\` on the ${target_binary:t} binary"
+        +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} {auto}Set \`+x\`{rst} on the {pname}${target_binary:t}{rst} binary"
       else
-        +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} {error}Something went wrong while setting {opt}+x{error} on the {pname}${target_binary:t}{error} binary"
+        +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} {error}Something went wrong while setting {auto}\`+x\`{error} on the {pname}${target_binary:t}{error} binary"
       fi
     }
   }

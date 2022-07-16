@@ -152,7 +152,8 @@
             if (( ${#files} )); then
               fbin="${files[1]}"
             else
-              +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} {error}The automatic-empty {ice}fbin{rst} {cmd}ice{error} didn't find any executable files for {id-as}${id_as}{rst}"              break
+              +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} {error}The automatic-empty {ice}fbin{rst} {cmd}ice{error} didn't find any executable files for {id-as}$id_as{rst}"
+              break
             fi
           fi
       elif [[ -z $fbin ]]; then

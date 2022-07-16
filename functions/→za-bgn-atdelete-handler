@@ -42,7 +42,7 @@
             if (( ${#files} )); then
               sbin="${files[1]}"
             else
-              +zi-message "{annex}bin-gem-node-annex{ehi}: {warn}The automatic-empty {ice}sbin{warn} ice didn't find any executable files{rst}"
+              +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} {warn}The automatic-empty {ice}sbin{warn} ice didn't find any executable files{rst}"
               break
             fi
           fi
@@ -71,12 +71,13 @@
           if [[ -f $file ]]; then
             command rm -f "$file"
             if [[ -f $file ]]; then
-              +zi-message "{annex}bin-gem-node-annex{ehi}: {warn}Couldn't remove the {pname}${fnam}{warn} shim from {dir}\$ZPFX/bin{rst} {info2}(no write access to \$ZPFX/bin?){rst}"
+              +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} {warn}Couldn't remove the {pname}$fnam{warn} shim from {dir}\$ZPFX/bin{rst} \
+              {nl}{mmdsh}{rst} No write access to {dir}\$ZPFX/bin{rst}?"
             else
-              +zi-message "{annex}bin-gem-node-annex{ehi}: {auto}Correctly removed the $fnam shim from{rst} {dir}\$ZPFX/bin{rst}" || \
+              +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} Correctly removed the {pname}$fnam{rst} shim from {dir}\$ZPFX/bin{rst}" || \
             fi
           else
-            +zi-message "{annex}bin-gem-node-annex{ehi}: {warn}The {pname}${fnam}{warn} shim didn't exist in {dir}\$ZPFX/bin{rst} {info2}(or isn't a regular file){rst}"
+            +zi-message "{annex}bin-gem-node-annex{ehi}:{rst} {warn}The {pname}$fnam{warn} shim didn't exist in {dir}\$ZPFX/bin{rst}"
           fi
         }
       }
