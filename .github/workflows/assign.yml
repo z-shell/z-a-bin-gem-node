@@ -17,5 +17,5 @@ jobs:
         with:
           project-url: https://github.com/orgs/z-shell/projects/4
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          labeled: bug 🐞, triage 📑, package 📦
+          labeled: bug 🐞, triage 📑, annex 🌀
           label-operator: OR
