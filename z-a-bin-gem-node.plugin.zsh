@@ -14,10 +14,13 @@ if [[ $PMSPEC != *f* ]] {
 }
 
 # https://z.digitalclouds.dev/community/zsh_plugin_standard/#the-proposed-function-name-prefixes
-autoload -Uz .za-bgn-bin-or-src-function-body .za-bgn-bin-or-src-function-body-cygwin \
-.za-bgn-mod-function-body →za-bgn-atload-handler →za-bgn-atclone-handler \
-→za-bgn-atpull-handler →za-bgn-atdelete-handler \
-→za-bgn-help-handler →za-bgn-shim-list
+
+#autoload -Uz .za-bgn-bin-or-src-function-body .za-bgn-bin-or-src-function-body-cygwin \
+#.za-bgn-mod-function-body →za-bgn-atload-handler →za-bgn-atclone-handler \
+#→za-bgn-atpull-handler →za-bgn-atdelete-handler \
+#→za-bgn-help-handler →za-bgn-shim-list
+
+autoload -Uz "${0:h}/functions"/*(.:t)
 
 # An empty stub to fill the help handler fields
 →za-bgn-null-handler() { :; }
