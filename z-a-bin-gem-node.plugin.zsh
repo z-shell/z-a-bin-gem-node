@@ -1,7 +1,7 @@
 # -*- mode: zsh; sh-indentation: 2; indent-tabs-mode: nil; sh-basic-offset: 2; -*-
 # vim: ft=zsh sw=2 ts=2 et
 #
-#   Annex bin-gem-node | Copyright Ⓒ 2022 Z-Shell  Community
+#   Annex bin-gem-node | Copyright Ⓒ 2022 Z-Shell Community
 #
 #   This program is free software: you can redistribute it and/or modify
 #   it under the terms of the GNU General Public License as published by
