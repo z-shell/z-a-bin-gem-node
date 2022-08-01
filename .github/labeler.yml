@@ -37,9 +37,10 @@ i18n 🌐:
   - "i18n/**"
   - "docs/i18n/**"
 annex 🌀:
-  - "functions/→za**"
-plugin ⚙️:
   - "*.zsh"
+  - "functions/→za**"
+#plugin ⚙️:
+#  - "*.zsh"
 #package 📦:
 #  - 'package.json'
 ci 🤖:
