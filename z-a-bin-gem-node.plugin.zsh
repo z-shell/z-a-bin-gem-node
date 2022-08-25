@@ -17,40 +17,40 @@
 #   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # Zsh Plugin Standard:
+builtin emulate -L zsh ${=${options[xtrace]:#off}:+-o xtrace}
+builtin setopt extended_glob warn_create_global typeset_silent no_short_loops rc_quotes no_auto_pushd
+
 # https://z.digitalclouds.dev/community/zsh_plugin_standard/#zero-handling
 0="${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
+# https://wiki.zshell.dev/community/zsh_plugin_standard#standard-plugins-hash
+typeset -gA Plugins
+Plugins[Z_A_BIN_GEM_NODE]="${0:h}"
+
 # https://z.digitalclouds.dev/community/zsh_plugin_standard/#funtions-directory
-if [[ $PMSPEC != *f* ]] {
+if [[ $PMSPEC != *f* ]]; then
   fpath+=( "${0:h}/functions" )
-}
+fi
 
 # Autoload functions
-autoload -Uz \
-  .za-bgn-{bin-or-src-function-{body,body-cygwin},mod-function-body} \
-  .za-bgn-{{atclone,atload,atdelete,help}-handler,shim-list}
+autoload -Uz .za-bgn-{bin-or-src-function-{body,body-cygwin},mod-function-body}
+autoload -Uz .za-bgn-{{atclone,atload,atdelete,help}-handler,shim-list}
 
 # An empty stub to fill the help handler fields
 .za-bgn-null-handler() { :; }
 
-@zi-register-annex "z-a-bin-gem-node" \
-subcommand:shim-list \
-.za-bgn-shim-list \
-.za-bgn-help-handler
+@zi-register-annex "z-a-bin-gem-node" subcommand:shim-list \
+.za-bgn-shim-list .za-bgn-help-handler
 
 @zi-register-annex "z-a-bin-gem-node" hook:\!atload-50 \
-.za-bgn-atload-handler \
-.za-bgn-null-handler "fbin''|sbin|sbin''|gem''|node''|pip''|fmod''|fsrc''|ferc''"
+.za-bgn-atload-handler .za-bgn-null-handler "fbin''|sbin|sbin''|gem''|node''|pip''|fmod''|fsrc''|ferc''"
 
 @zi-register-annex "z-a-bin-gem-node" hook:atclone-50 \
-.za-bgn-atclone-handler \
-.za-bgn-null-handler
+.za-bgn-atclone-handler .za-bgn-null-handler
 
 @zi-register-annex "z-a-bin-gem-node" hook:\%atpull-50 \
-.za-bgn-atclone-handler \
-.za-bgn-null-handler
+.za-bgn-atclone-handler .za-bgn-null-handler
 
 @zi-register-annex "z-a-bin-gem-node" hook:atdelete-50 \
-.za-bgn-atdelete-handler \
-.za-bgn-null-handler
+.za-bgn-atdelete-handler .za-bgn-null-handler
