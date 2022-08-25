@@ -4,7 +4,6 @@
 #
 # Copyright (c) 2021 Z-Shell Community
 
-→za-bgn-atclone-handler() {
   builtin emulate -L zsh ${=${options[xtrace]:#off}:+-o xtrace}
   builtin setopt extended_glob warn_create_global typeset_silent no_short_loops rc_quotes no_auto_pushd
 
@@ -134,7 +133,7 @@
     (( perform_update )) && \
     (
       builtin cd -q "$dir" && {
-        if (( !OPTS[opt_-q,--quiet] )) {
+        if (( ! OPTS[opt_-q,--quiet] )) {
           +zi-message "{annex}bin-gem-node-annex{ehi}: {auto}Updating the node modules …"
           command npm --silent update
         } else {
@@ -271,4 +270,3 @@
       fi
     }
   }
-}

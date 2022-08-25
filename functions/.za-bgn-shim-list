@@ -9,8 +9,6 @@
 #		    [-o|--one-line] [-s|--short]
 #
 
-→za-bgn-shim-list() {
-
   builtin emulate -L zsh ${=${options[xtrace]:#off}:+-o xtrace}
   builtin setopt extended_glob typeset_silent no_short_loops rc_quotes no_auto_pushd
 
@@ -27,7 +25,7 @@
   }
 
   if (( ${#opt_help} )) {
-    →za-bgn-help-handler
+    .za-bgn-help-handler
     return $?
   }
 
@@ -116,4 +114,3 @@
       } else {
         pr -4 -T
       }
-}
