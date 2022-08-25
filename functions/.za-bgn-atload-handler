@@ -4,8 +4,6 @@
 #
 # Copyright (c) 2021-present Z-Shell Community
 
-→za-bgn-atload-handler() {
-
   builtin emulate -L zsh ${=${options[xtrace]:#off}:+-o xtrace}
   builtin setopt extended_glob warn_create_global typeset_silent no_short_loops rc_quotes no_auto_pushd
 
@@ -216,4 +214,3 @@
       eval "$REPLY"
     }
   }
-}

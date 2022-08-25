@@ -27,28 +27,30 @@ if [[ $PMSPEC != *f* ]] {
 }
 
 # Autoload functions
-autoload -Uz "${0:h}/functions"/{.*,*}(.:t)
+autoload -Uz \
+  .za-bgn-{bin-or-src-function-{body,body-cygwin},mod-function-body} \
+  .za-bgn-{{atclone,atload,atdelete,help}-handler,shim-list}
 
 # An empty stub to fill the help handler fields
-→za-bgn-null-handler() { :; }
+.za-bgn-null-handler() { :; }
 
 @zi-register-annex "z-a-bin-gem-node" \
 subcommand:shim-list \
-→za-bgn-shim-list \
-→za-bgn-help-handler
+.za-bgn-shim-list \
+.za-bgn-help-handler
 
 @zi-register-annex "z-a-bin-gem-node" hook:\!atload-50 \
-→za-bgn-atload-handler \
-→za-bgn-null-handler "fbin''|sbin|sbin''|gem''|node''|pip''|fmod''|fsrc''|ferc''"
+.za-bgn-atload-handler \
+.za-bgn-null-handler "fbin''|sbin|sbin''|gem''|node''|pip''|fmod''|fsrc''|ferc''"
 
 @zi-register-annex "z-a-bin-gem-node" hook:atclone-50 \
-→za-bgn-atclone-handler \
-→za-bgn-null-handler
+.za-bgn-atclone-handler \
+.za-bgn-null-handler
 
 @zi-register-annex "z-a-bin-gem-node" hook:\%atpull-50 \
-→za-bgn-atclone-handler \
-→za-bgn-null-handler
+.za-bgn-atclone-handler \
+.za-bgn-null-handler
 
 @zi-register-annex "z-a-bin-gem-node" hook:atdelete-50 \
-→za-bgn-atdelete-handler \
-→za-bgn-null-handler
+.za-bgn-atdelete-handler \
+.za-bgn-null-handler

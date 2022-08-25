@@ -7,8 +7,6 @@
 # FUNCTION: .za-bgn-bin-or-src-function-body
 # Returns the body of the function wrapping a binary
 
-.za-bgn-bin-or-src-function-body-cygwin() {
-
   builtin emulate -L zsh ${=${options[xtrace]:#off}:+-o xtrace}
   builtin setopt extended_glob warn_create_global typeset_silent no_short_loops rc_quotes no_auto_pushd
 
@@ -47,4 +45,3 @@
   REPLY+="$nl"
   REPLY+="${${(M)set_cwd:#1}:+"${nl}cd %oldpwd%"
   }"
-}

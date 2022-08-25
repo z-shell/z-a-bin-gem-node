@@ -1,0 +1,11 @@
+#autoload
+# -*- mode: zsh; sh-indentation: 2; indent-tabs-mode: nil; sh-basic-offset: 2; -*-
+# vim: ft=zsh sw=2 ts=2 et
+
++zi-message "{auto} —— shim-list [ -t | -i | -o | -s | -h ] {nl}{nl}" \
+  "{auto}[ -t ] —— Check shims in the current directory instead of {dir} \$ZPFX/bin {nl}" \
+  "{auto}[ -i ] —— Show the list of shims that results from the sbin ice of the loaded plugins {nl}" \
+  "{auto}[ -o ] —— Display the list of shim files without line breaks, in single line, after spaces {nl}" \
+  "{auto}[ -s ] —— Exclude the plugin or snippet from showing in a list of shims {nl}" \
+  "{auto}[ -h ] —— This message {nl}"
+return 0
