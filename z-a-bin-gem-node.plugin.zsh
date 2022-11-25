@@ -16,7 +16,7 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
-# https://z.digitalclouds.dev/community/zsh_plugin_standard/#zero-handling
+# https://wiki.zshell.dev/community/zsh_plugin_standard/#zero-handling
 0="${ZERO:-${${0:#$ZSH_ARGZERO}:-${(%):-%N}}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
@@ -24,7 +24,7 @@
 typeset -gA Plugins
 Plugins[Z_A_BIN_GEM_NODE]="${0:h}"
 
-# https://z.digitalclouds.dev/community/zsh_plugin_standard/#funtions-directory
+# https://wiki.zshell.dev/community/zsh_plugin_standard/#funtions-directory
 if [[ $PMSPEC != *f* ]]; then
   fpath+=( "${0:h}/functions" )
 fi
