@@ -1,5 +1,5 @@
 ---
-name: '❇️ Assign'
+name: "❇️ Assign"
 
 on:
   issues:

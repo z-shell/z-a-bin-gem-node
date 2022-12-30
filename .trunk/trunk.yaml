@@ -1,23 +1,28 @@
 version: 0.1
 cli:
-  version: 0.16.1-beta
+  version: 1.2.1
 repo:
   repo:
     host: github.com
     owner: z-shell
     name: z-a-bin-gem-node
+plugins:
+  sources:
+    - id: trunk
+      uri: https://github.com/trunk-io/plugins
+      ref: v0.0.8
+      import_to_global: true
 lint:
   linters:
-    - name: markdownlint
-      command: [markdownlint, -q, --config, .github/.markdownlint.yaml, "${target}"]
-      direct_configs: [.github/.markdownlint.yaml]
-    - name: prettier
-      command: [prettier, -q, --config, .github/.prettierrc, "${target}"]
-      direct_configs: [.github/.prettierrc]
   enabled:
-    - git-diff-check@SYSTEM
-    - actionlint@1.6.16
-    - gitleaks@8.11.1
     - markdownlint@0.32.2
-    - prettier@2.7.1
+    - prettier@2.8.1
+    - oxipng@8.0.0
+    - git-diff-check@SYSTEM
+    - actionlint@1.6.22
+    - gitleaks@8.15.2
     - shfmt@3.5.0
+runtimes:
+  enabled:
+    - go@1.18.3
+    - node@16.14.2
